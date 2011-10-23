@@ -118,7 +118,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def mash_volume
-    Gallon.new((grain_weight * 16 * mash_thickness))
+    Gallon.new((grain_weight * 16 * mash_thickness) / 128)
   end
 
   def maximum_mash_gravity
@@ -146,11 +146,12 @@ class Recipe < ActiveRecord::Base
   end
 
   def runnings
-    (mash_volume - water_absorbed_by_grain - water_lost_in_false_bottom)
+    Gallon.new(mash_volume - water_absorbed_by_grain - water_lost_in_false_bottom)
   end
 
   def sparge_water
     (pre_boil_volume.to_oz) - runnings
+    # Gallon.new((pre_boil_volume - runnings))
   end
 
   def strike_temp(goal_temp, original_temp)
@@ -170,15 +171,15 @@ class Recipe < ActiveRecord::Base
   end
 
   def water_absorbed_per_pound_of_grain
-    Gallon.new(13.0/128).to_oz
+    Gallon.new(13.0/128)
   end
 
   def water_absorbed_by_grain
-    grain_weight * water_absorbed_per_pound_of_grain
+    Gallon.new(grain_weight * water_absorbed_per_pound_of_grain)
   end
 
   def water_lost_in_false_bottom
-    44
+    Gallon.new(44.0/128)
   end
 
   def yeasts

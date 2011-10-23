@@ -81,7 +81,8 @@
           <tr>
             <th>Mash Volume: </th>
             <td style='width:100%;'>
-              <%= number_with_precision(@recipe.mash_volume, :precision => 2) %>
+              <%= number_with_precision(@recipe.mash_volume.to_oz, :precision => 0) %>
+              (<%= number_with_precision(@recipe.mash_volume, :precision => 2) %>)
             </td>
           </tr>
           <tr>
@@ -440,14 +441,14 @@
           <th>Oz lost per pound</th>
           <td class='no_line' style='text-align:right;'>x</td>
           <td>
-            <%= number_with_precision(@recipe.water_absorbed_per_pound_of_grain, :precision => 0) %>
+            <%= number_with_precision(@recipe.water_absorbed_per_pound_of_grain.to_oz, :precision => 0) %>
           </td>
         </tr>
         <tr>
           <th>Expected loss</th>
           <td class='no_line' style='text-align:right;'>=</td>
           <td>
-            <%= number_with_precision(@recipe.water_absorbed_by_grain, :precision => 0) %>
+            <%= number_with_precision(@recipe.water_absorbed_by_grain.to_oz, :precision => 0) %>
           </td>
         </tr>
         <tr>
@@ -467,21 +468,21 @@
           <th>Lost to Grain</th>
           <td class='no_line'>&ndash;</td>
           <td>
-            <%= number_with_precision(@recipe.water_absorbed_by_grain, :precision => 0) %>
+            <%= number_with_precision(@recipe.water_absorbed_by_grain.to_oz, :precision => 0) %>
           </td>
         </tr>
         <tr>
           <th>Lost to False Bottom</th>
           <td class='no_line'>&ndash;</td>
           <td>
-            <%= number_with_precision(@recipe.water_lost_in_false_bottom, :precision => 0) %>
+            <%= number_with_precision(@recipe.water_lost_in_false_bottom.to_oz, :precision => 0) %>
           </td>
         </tr>
         <tr>
           <th>Expected Runnings</th>
           <td class='no_line' style='text-align:right;'>=</td>
           <td>
-            <%= number_with_precision(@recipe.runnings, :precision => 0) %>
+            <%= number_with_precision(@recipe.runnings.to_oz, :precision => 0) %>
           </td>
         </tr>
         <tr>
@@ -494,13 +495,14 @@
           <td class='no_line'>&nbsp;</td>
           <td>
             <%= number_with_precision(@recipe.pre_boil_volume.to_oz, :precision => 0) %>
+            (<%= number_with_precision(@recipe.pre_boil_volume, :precision => 2) %>)
           </td>
         </tr>
         <tr>
           <th>Expected Runnings</th>
           <td class='no_line' style='text-align:right;'>&ndash;</td>
           <td>
-            <%= number_with_precision(@recipe.runnings, :precision => 0) %>
+            <%= number_with_precision(@recipe.runnings.to_oz, :precision => 0) %>
           </td>
         </tr>
         <tr>
@@ -542,6 +544,7 @@
           <td class='no_line'>&nbsp;</td>
           <td>
             <%= number_with_precision(@recipe.pre_boil_volume.to_oz, :precision => 0) %>
+            (<%= number_with_precision(@recipe.pre_boil_volume, :precision => 2) %>)
           </td>
         </tr>
         <tr>
@@ -556,6 +559,7 @@
           <td class='no_line' style='text-align:right;'>=</td>
           <td>
             <%= number_with_precision(@recipe.post_boil_volume.to_oz, :precision => 0) %>
+            (<%= number_with_precision(@recipe.post_boil_volume, :precision => 2) %>)
           </td>
         </tr>
         <tr>
@@ -568,6 +572,7 @@
           <td class='no_line'>&nbsp;</td>
           <td>
             <%= number_with_precision(@recipe.post_boil_volume.to_oz, :precision => 0) %>
+            (<%= number_with_precision(@recipe.post_boil_volume, :precision => 2) %>)
           </td>
         </tr>
         <tr>
@@ -575,6 +580,7 @@
           <td class='no_line' style='text-align:right;'>&ndash;</td>
           <td>
             <%= number_with_precision(@recipe.trub_loss.to_oz, :precision => 0) %>
+            (<%= number_with_precision(@recipe.trub_loss, :precision => 2) %>)
           </td>
         </tr>
         <tr>
