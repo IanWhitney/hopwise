@@ -1,0 +1,18 @@
+<tr>
+  <td class='single_right'>
+    <% if hop.first_wort? %>
+      FWH
+    <% else %>
+      <%= number_with_precision(hop.time, :precision => 0) %> <%= hop.dry? ? "days" : "min" %>
+    <% end %>
+  </td>
+  <td class='single_right'>
+    <%= number_with_precision(hop.grams, :precision => 2) %>
+  </td>
+  <td class='single_right'>g</td>
+  <td class='single_right'><%= hop.name %></td>
+  <td class='single_right'>
+    <%= number_with_precision(hop.alpha, :precision => 2) %>
+  </td>
+  <td><%= hop.form %></td>
+</tr>

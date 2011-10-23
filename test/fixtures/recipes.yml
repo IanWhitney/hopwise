@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  id: 14
+  batch_number: 14
+  name: "Mieke Michu"
+
+two:
+  id: 15
+  batch_number: 15
+  name: "TBD Dubbel"

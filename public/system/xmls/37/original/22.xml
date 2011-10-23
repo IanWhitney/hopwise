@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- BeerXML from Hopville.com -->
+<RECIPES>
+<RECIPE>
+  <VERSION>1</VERSION>
+  <NAME>IanPAlooza</NAME>
+  <TYPE>Partial Mash</TYPE>
+  <BREWER>Ian Whitney</BREWER>
+  <BATCH_SIZE>42.4</BATCH_SIZE>
+  <BOIL_SIZE>26.5</BOIL_SIZE>
+  <BOIL_TIME>60</BOIL_TIME>
+  <EFFICIENCY>70.0</EFFICIENCY>
+  <FERMENTATION_STAGES>0</FERMENTATION_STAGES>
+  <STYLE>
+    <VERSION>1</VERSION>
+    <NAME>English IPA</NAME>
+    <CATEGORY>India pale ale (ipa)</CATEGORY>
+    <CATEGORY_NUMBER>14</CATEGORY_NUMBER>
+    <STYLE_LETTER>A</STYLE_LETTER>
+    <TYPE>Ale</TYPE>
+    <STYLE_GUIDE>BJCP</STYLE_GUIDE>
+    <OG_MIN>1.050</OG_MIN>
+    <OG_MAX>1.075</OG_MAX>
+    <FG_MIN>1.010</FG_MIN>
+    <FG_MAX>1.018</FG_MAX>
+    <IBU_MIN>40.0</IBU_MIN>
+    <IBU_MAX>60.0</IBU_MAX>
+    <COLOR_MIN>8.0</COLOR_MIN>
+    <COLOR_MAX>14.0</COLOR_MAX>
+    <ABV_MIN>5.0</ABV_MIN>
+    <ABV_MAX>7.5</ABV_MAX>
+  </STYLE>
+  <FERMENTABLES>
+    <FERMENTABLE>
+      <VERSION>1</VERSION>
+      <NAME>Warminster Floor-Malted Maris Otter</NAME>
+      <TYPE>Grain</TYPE>
+      <AMOUNT>3.62873896</AMOUNT>
+      <DISPLAY_AMOUNT>128 ozs</DISPLAY_AMOUNT>
+      <YIELD>76.1</YIELD>
+      <POTENTIAL>1.035</POTENTIAL>
+      <COLOR>5.0</COLOR>
+      <ADD_AFTER_BOIL>FALSE</ADD_AFTER_BOIL>
+      <ORIGIN/>
+      <NOTES/>
+      <COARSE_FINE_DIFF/>
+      <MOISTURE/>
+      <DIASTATIC_POWER/>
+      <PROTEIN/>
+      <MAX_IN_BATCH/>
+      <RECOMMEND_MASH>TRUE</RECOMMEND_MASH>
+      <DISPLAY_COLOR>5L</DISPLAY_COLOR>
+    </FERMENTABLE>
+    <FERMENTABLE>
+      <VERSION>1</VERSION>
+      <NAME>Golden Promise</NAME>
+      <TYPE>Grain</TYPE>
+      <AMOUNT>3.62873896</AMOUNT>
+      <DISPLAY_AMOUNT>128 ozs</DISPLAY_AMOUNT>
+      <YIELD>76.1</YIELD>
+      <POTENTIAL>1.035</POTENTIAL>
+      <COLOR>2.0</COLOR>
+      <ADD_AFTER_BOIL>FALSE</ADD_AFTER_BOIL>
+      <ORIGIN/>
+      <NOTES/>
+      <COARSE_FINE_DIFF/>
+      <MOISTURE/>
+      <DIASTATIC_POWER/>
+      <PROTEIN/>
+      <MAX_IN_BATCH/>
+      <RECOMMEND_MASH>TRUE</RECOMMEND_MASH>
+      <DISPLAY_COLOR>2L</DISPLAY_COLOR>
+    </FERMENTABLE>
+    <FERMENTABLE>
+      <VERSION>1</VERSION>
+      <NAME>Muntons Light Dry Malt Extract</NAME>
+      <TYPE>Dry Extract</TYPE>
+      <AMOUNT>2.72155422</AMOUNT>
+      <DISPLAY_AMOUNT>96 ozs</DISPLAY_AMOUNT>
+      <YIELD>91.3</YIELD>
+      <POTENTIAL>1.042</POTENTIAL>
+      <COLOR>5.0</COLOR>
+      <ADD_AFTER_BOIL>FALSE</ADD_AFTER_BOIL>
+      <ORIGIN/>
+      <NOTES/>
+      <COARSE_FINE_DIFF/>
+      <MOISTURE/>
+      <DIASTATIC_POWER/>
+      <PROTEIN/>
+      <MAX_IN_BATCH/>
+      <RECOMMEND_MASH>FALSE</RECOMMEND_MASH>
+      <DISPLAY_COLOR>5L</DISPLAY_COLOR>
+    </FERMENTABLE>
+    <FERMENTABLE>
+      <VERSION>1</VERSION>
+      <NAME>Wheat Malt</NAME>
+      <TYPE>Grain</TYPE>
+      <AMOUNT>0.45359237</AMOUNT>
+      <DISPLAY_AMOUNT>16 ozs</DISPLAY_AMOUNT>
+      <YIELD>84.8</YIELD>
+      <POTENTIAL>1.039</POTENTIAL>
+      <COLOR>2.0</COLOR>
+      <ADD_AFTER_BOIL>FALSE</ADD_AFTER_BOIL>
+      <ORIGIN/>
+      <NOTES/>
+      <COARSE_FINE_DIFF/>
+      <MOISTURE/>
+      <DIASTATIC_POWER/>
+      <PROTEIN/>
+      <MAX_IN_BATCH/>
+      <RECOMMEND_MASH>TRUE</RECOMMEND_MASH>
+      <DISPLAY_COLOR>2L</DISPLAY_COLOR>
+    </FERMENTABLE>
+    <FERMENTABLE>
+      <VERSION>1</VERSION>
+      <NAME>Biscuit Malt</NAME>
+      <TYPE>Grain</TYPE>
+      <AMOUNT>0.45359237</AMOUNT>
+      <DISPLAY_AMOUNT>16 ozs</DISPLAY_AMOUNT>
+      <YIELD>78.3</YIELD>
+      <POTENTIAL>1.036</POTENTIAL>
+      <COLOR>23.0</COLOR>
+      <ADD_AFTER_BOIL>FALSE</ADD_AFTER_BOIL>
+      <ORIGIN>Belgian</ORIGIN>
+      <NOTES>Use for English ales, brown ales and porters.
+Adds a biscuit like flavor and aroma.
+Can be used as a substitute for toasted malt.</NOTES>
+      <COARSE_FINE_DIFF>1.5</COARSE_FINE_DIFF>
+      <MOISTURE>4.0</MOISTURE>
+      <DIASTATIC_POWER>6.0</DIASTATIC_POWER>
+      <PROTEIN>10.5</PROTEIN>
+      <MAX_IN_BATCH>10.0</MAX_IN_BATCH>
+      <RECOMMEND_MASH>TRUE</RECOMMEND_MASH>
+      <DISPLAY_COLOR>23L</DISPLAY_COLOR>
+    </FERMENTABLE>
+    <FERMENTABLE>
+      <VERSION>1</VERSION>
+      <NAME>Simpsons Medium Crystal</NAME>
+      <TYPE>Grain</TYPE>
+      <AMOUNT>0.45359237</AMOUNT>
+      <DISPLAY_AMOUNT>16 ozs</DISPLAY_AMOUNT>
+      <YIELD>73.9</YIELD>
+      <POTENTIAL>1.034</POTENTIAL>
+      <COLOR>55.0</COLOR>
+      <ADD_AFTER_BOIL>FALSE</ADD_AFTER_BOIL>
+      <ORIGIN/>
+      <NOTES/>
+      <COARSE_FINE_DIFF/>
+      <MOISTURE/>
+      <DIASTATIC_POWER/>
+      <PROTEIN/>
+      <MAX_IN_BATCH/>
+      <RECOMMEND_MASH>TRUE</RECOMMEND_MASH>
+      <DISPLAY_COLOR>55L</DISPLAY_COLOR>
+    </FERMENTABLE>
+    <FERMENTABLE>
+      <VERSION>1</VERSION>
+      <NAME>Simpsons Extra Dark Crystal</NAME>
+      <TYPE>Grain</TYPE>
+      <AMOUNT>0.3401942775</AMOUNT>
+      <DISPLAY_AMOUNT>12 ozs</DISPLAY_AMOUNT>
+      <YIELD>73.9</YIELD>
+      <POTENTIAL>1.034</POTENTIAL>
+      <COLOR>160.0</COLOR>
+      <ADD_AFTER_BOIL>FALSE</ADD_AFTER_BOIL>
+      <ORIGIN/>
+      <NOTES/>
+      <COARSE_FINE_DIFF/>
+      <MOISTURE/>
+      <DIASTATIC_POWER/>
+      <PROTEIN/>
+      <MAX_IN_BATCH/>
+      <RECOMMEND_MASH>TRUE</RECOMMEND_MASH>
+      <DISPLAY_COLOR>160L</DISPLAY_COLOR>
+    </FERMENTABLE>
+  </FERMENTABLES>
+  <HOPS>
+    <HOP>
+      <VERSION>1</VERSION>
+      <NAME>East Kent Goldings</NAME>
+      <ALPHA>5.0</ALPHA>
+      <AMOUNT>0.014</AMOUNT>
+      <DISPLAY_AMOUNT>0.494 ozs</DISPLAY_AMOUNT>
+      <USE>Dry Hop</USE>
+      <TIME>17280</TIME>
+      <FORM>Pellet</FORM>
+      <NOTES/>
+      <TYPE/>
+      <BETA>0.0</BETA>
+      <HSI/>
+      <ORIGIN/>
+    </HOP>
+    <HOP>
+      <VERSION>1</VERSION>
+      <NAME>Fuggles</NAME>
+      <ALPHA>4.5</ALPHA>
+      <AMOUNT>0.01</AMOUNT>
+      <DISPLAY_AMOUNT>0.353 ozs</DISPLAY_AMOUNT>
+      <USE>Dry Hop</USE>
+      <TIME>17280</TIME>
+      <FORM>Pellet</FORM>
+      <NOTES>Used For: General purpose bittering/aroma for English Ales, Dark Lagers
+Aroma: Mild, soft, grassy, floral aroma
+Substitute: East Kent Goldings, Williamette
+Examples: Samuel Smith&amp;apos;s Pale Ale, Old Peculiar, Thomas Hardy&amp;apos;s Ale</NOTES>
+      <TYPE>aroma</TYPE>
+      <BETA>2.0</BETA>
+      <HSI>35.0</HSI>
+      <ORIGIN>United Kingdom</ORIGIN>
+    </HOP>
+    <HOP>
+      <VERSION>1</VERSION>
+      <NAME>Palisades</NAME>
+      <ALPHA>9.5</ALPHA>
+      <AMOUNT>0.019</AMOUNT>
+      <DISPLAY_AMOUNT>0.67 ozs</DISPLAY_AMOUNT>
+      <USE>Dry Hop</USE>
+      <TIME>7200</TIME>
+      <FORM>Leaf</FORM>
+      <NOTES/>
+      <TYPE/>
+      <BETA>0.0</BETA>
+      <HSI/>
+      <ORIGIN/>
+    </HOP>
+    <HOP>
+      <VERSION>1</VERSION>
+      <NAME>Willamette</NAME>
+      <ALPHA>5.5</ALPHA>
+      <AMOUNT>0.019</AMOUNT>
+      <DISPLAY_AMOUNT>0.67 ozs</DISPLAY_AMOUNT>
+      <USE>Dry Hop</USE>
+      <TIME>7200</TIME>
+      <FORM>Leaf</FORM>
+      <NOTES>Use for: Finishing American and British Ales Aroma: Mild, grassy, floral, slightly spicy Substitutes: Fuggles, E.K. Goldings Examples: Sierra Nevada Porter, Ballard Bitter</NOTES>
+      <TYPE/>
+      <BETA>0.0</BETA>
+      <HSI/>
+      <ORIGIN/>
+    </HOP>
+    <HOP>
+      <VERSION>1</VERSION>
+      <NAME>East Kent Goldings</NAME>
+      <ALPHA>4.5</ALPHA>
+      <AMOUNT>0.161</AMOUNT>
+      <DISPLAY_AMOUNT>5.679 ozs</DISPLAY_AMOUNT>
+      <USE>Boil</USE>
+      <TIME>60</TIME>
+      <FORM>Pellet</FORM>
+      <NOTES/>
+      <TYPE/>
+      <BETA>0.0</BETA>
+      <HSI/>
+      <ORIGIN/>
+    </HOP>
+    <HOP>
+      <VERSION>1</VERSION>
+      <NAME>Fuggles</NAME>
+      <ALPHA>4.2</ALPHA>
+      <AMOUNT>0.101</AMOUNT>
+      <DISPLAY_AMOUNT>3.563 ozs</DISPLAY_AMOUNT>
+      <USE>Boil</USE>
+      <TIME>10</TIME>
+      <FORM>Pellet</FORM>
+      <NOTES>Used For: General purpose bittering/aroma for English Ales, Dark Lagers
+Aroma: Mild, soft, grassy, floral aroma
+Substitute: East Kent Goldings, Williamette
+Examples: Samuel Smith&amp;apos;s Pale Ale, Old Peculiar, Thomas Hardy&amp;apos;s Ale</NOTES>
+      <TYPE>aroma</TYPE>
+      <BETA>2.0</BETA>
+      <HSI>35.0</HSI>
+      <ORIGIN>United Kingdom</ORIGIN>
+    </HOP>
+    <HOP>
+      <VERSION>1</VERSION>
+      <NAME>East Kent Goldings</NAME>
+      <ALPHA>4.5</ALPHA>
+      <AMOUNT>0.094</AMOUNT>
+      <DISPLAY_AMOUNT>3.316 ozs</DISPLAY_AMOUNT>
+      <USE>Boil</USE>
+      <TIME>1</TIME>
+      <FORM>Pellet</FORM>
+      <NOTES/>
+      <TYPE/>
+      <BETA>0.0</BETA>
+      <HSI/>
+      <ORIGIN/>
+    </HOP>
+  </HOPS>
+  <YEASTS>
+    <YEAST>
+      <VERSION>1</VERSION>
+      <NAME>Wyeast London Ale III (1318)</NAME>
+      <TYPE>Ale</TYPE>
+      <FORM>Liquid</FORM>
+      <LABORATORY/>
+      <PRODUCT_ID/>
+      <MIN_TEMPERATURE/>
+      <MAX_TEMPERATURE/>
+      <FLOCCULATION>High</FLOCCULATION>
+      <ATTENUATION>73.0</ATTENUATION>
+      <AMOUNT>0.135</AMOUNT>
+      <NOTES/>
+      <BEST_FOR/>
+    </YEAST>
+    <YEAST>
+      <VERSION>1</VERSION>
+      <NAME>Wyeast 1882 Thames Valley II</NAME>
+      <TYPE>Ale</TYPE>
+      <FORM>Liquid</FORM>
+      <LABORATORY/>
+      <PRODUCT_ID/>
+      <MIN_TEMPERATURE/>
+      <MAX_TEMPERATURE/>
+      <FLOCCULATION>High</FLOCCULATION>
+      <ATTENUATION>77.0</ATTENUATION>
+      <AMOUNT>0.135</AMOUNT>
+      <NOTES/>
+      <BEST_FOR/>
+    </YEAST>
+  </YEASTS>
+  <MISCS>
+    <MISC>
+      <VERSION>1</VERSION>
+      <NAME>Whirlfloc Tablet</NAME>
+      <TYPE>fining</TYPE>
+      <USE>boil</USE>
+      <TIME>15</TIME>
+      <AMOUNT>0</AMOUNT>
+      <AMOUNT_IS_WEIGHT>FALSE</AMOUNT_IS_WEIGHT>
+      <USE_FOR>Clarity</USE_FOR>
+      <NOTES>Aids in clearing yeast and chill haze.  Easy to use tablet form.</NOTES>
+    </MISC>
+    <MISC>
+      <VERSION>1</VERSION>
+      <NAME>Yeast Nutrient (WYeast)</NAME>
+      <TYPE>other</TYPE>
+      <USE>boil</USE>
+      <TIME>10</TIME>
+      <AMOUNT>0</AMOUNT>
+      <AMOUNT_IS_WEIGHT>FALSE</AMOUNT_IS_WEIGHT>
+      <USE_FOR>Fermentation</USE_FOR>
+      <NOTES>A blend of vitamins, minerals, amino acids, nitrogen compounds, zinc, and other elements benefical for fermentation. Use 1/2 tsp. per five gallons, last 15 min of boil.</NOTES>
+    </MISC>
+  </MISCS>
+  <WATERS/>
+  <MASHS>
+  </MASHS>
+  <NOTES>Adapted from &amp;apos;Brewing Classic Styles&amp;apos; for a high-gravity partial boil. Split wort into two fermenters and bring them both up to about 5.2 gallons. One fermenter gets 1318 yeast, the other gets 1882.</NOTES>
+  <TASTE_NOTES/>
+  <TASTE_RATING/>
+  <EST_OG>1.065</EST_OG>
+  <EST_FG>1.018</EST_FG>
+  <EST_COLOR>14</EST_COLOR>
+  <IBU>55.9</IBU>
+  <IBU_METHOD>Rager</IBU_METHOD>
+  <EST_ABV>6.3</EST_ABV>
+  <CALORIES>215</CALORIES>
+  <DISPLAY_BATCH_SIZE>11.2 gal</DISPLAY_BATCH_SIZE>
+  <DISPLAY_BOIL_SIZE>7.0 gal</DISPLAY_BOIL_SIZE>
+</RECIPE>
+</RECIPES>

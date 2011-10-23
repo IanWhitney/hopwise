@@ -1,0 +1,75 @@
+  body {
+    font-size:11pt;
+    background-color: #ffffff;
+    color: #403528;
+  }
+  
+  p {
+    line-height: 1.4em;
+    padding: 0px;
+    margin: 0px;
+  }
+  
+  table {
+    width: 100%;
+  }
+
+  tbody th {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  tbody th.subheader{
+    padding-top: 4pt;
+    padding-bottom: 1pt;
+  }
+  
+  thead tr {
+    border-bottom: #d9cccf solid 1pt;
+  }
+  
+  thead th {
+    text-align: middle;
+		vertical-align: bottom;
+  }
+
+  tbody td {
+    border-bottom: #A1BCC5 solid 1pt;
+    height: 1.4em;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  td.single_right {
+    border-right: #736758 solid 1pt;
+  }
+
+  td.no_line {
+    border-bottom: none;
+  }
+
+  .header {
+/*    font-family: 'Smaragd LT Std';*/
+    font-size: 130%;
+    border-bottom: #d9cccf double 3pt;
+    margin: 4pt 0pt 2pt 0pt;
+  }
+  
+  .subheader {
+    font-weight: bold;
+    font-size: 120%;
+  }
+
+  .entry_line {
+    border-bottom: #A1BcC5 solid 1pt;
+    height: 1.4em;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+  }
+
+	th {font-style: italic; font-weight: normal;}
+
+	.typekit-badge {
+		display: none !important;
+	}

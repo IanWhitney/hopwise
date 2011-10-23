@@ -1,0 +1,700 @@
+    <div class='grid_12' style='text-align:left;margin-top:12pt;'>
+      <%= image_tag "logo.jpg" %>
+    </div>
+    <div class='grid_12'>
+      <table>
+        <tbody>
+          <tr>
+            <th>Batch Number: </th>
+            <td class='entry_line' colspan='3'>
+              <%= @recipe.batch_number %>
+            </td>
+          </tr>
+          <tr>
+            <th>Brew Date: </th>
+            <td class='entry_line' colspan='3'>
+              &nbsp;
+            </td>
+          </tr>
+          <tr>
+            <th>Name: </th>
+            <td class='entry_line' colspan='3'>
+              <%= @recipe.name %>
+            </td>
+          </tr>
+          <tr>
+            <th>Style: </th>
+            <td class='entry_line' colspan='3'>
+              <%= @recipe.style %>
+            </td>
+          </tr>
+          <tr>
+            <th>Batch Size: </th>
+            <td class='entry_line' colspan='3'>
+              <%= number_with_precision(@recipe.post_boil_volume, :precision => 2) %>
+            </td>
+          </tr>
+          <tr>
+            <th>IBU: </th>
+            <td class='entry_line' style='width:40%;'>
+              <%= @recipe.ibu %> (<%= @recipe.ibu_method %>)
+            </td>
+            <th>Color: </th>
+            <td class='entry_line' style='width:30%;'>
+              <%= @recipe.color %>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <div class='grid_24 header'>
+      Yeast
+    </div>
+    <div class='grid_16'>
+      <p class='subheader'>Types</p>
+      <%= render :partial => "yeast_row", :collection => @recipe.yeasts, :as => :yeast %>
+    </div>
+    <div class='grid_8'>
+      <p class='subheader'>Starter</p>
+      <table>
+        <tbody>
+          <tr>
+            <th>Volume: </th>
+            <td style='width:100%;'>&nbsp;</td>
+          </tr>
+          <tr>
+            <th>Decanted: </th>
+            <td style='width:100%;'>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class='grid_10'>
+      <p class='header'>Mash</p>
+      <table>
+        <tbody>
+          <tr>
+            <th>Water/Mash: </th>
+            <td style='width:100%;'><%= @recipe.mash_thickness %>oz/oz</td>
+          </tr>
+          <tr>
+            <th>Mash Volume: </th>
+            <td style='width:100%;'>
+              <%= number_with_precision(@recipe.mash_volume, :precision => 2) %>
+            </td>
+          </tr>
+          <tr>
+            <th>Mash Temp: </th>
+            <td style='width:100%;'>
+              <% if @recipe.mash_details_included? %>
+                <%= number_with_precision(@recipe.mash_temp, :precision => 0) %>
+              <% else %>
+                &nbsp;
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th>Strike Temp: </th>
+            <td style='width:100%;'>
+              <% if @recipe.mash_details_included? %>
+                <%= number_with_precision(@recipe.strike_temp(@recipe.mash_temp,70), :precision => 0) %>
+              <% else %>
+                &nbsp;
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th>Mash-Out Temp: </th>
+            <td style='width:100%;'>
+              <% if @recipe.mash_details_included? %>
+                <%= number_with_precision(@recipe.strike_temp(170,@recipe.mash_temp - 3) + 8, :precision => 0) %>
+              <% else %>
+                &nbsp;
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <img src="http://chart.apis.google.com/chart?chxp=0,0,15,30,45,60&chf=bg,s,ffffff&chxr=0,0,60|1,100,170&chxs=0,676767,11.5,0,lt,676767|1,676767,11.5,-0.5,lt,676767&chxt=x,y&chs=390x300&cht=lxy&chd=s:&chg=25,7.15,0,0" width="390" height="300" alt="" style='margin-top:10px;'/>
+      <table style='margin:1em 0em 0em 0em !important;'>
+        <thead>
+          <tr>
+            <th>Max Gravity</th>
+            <th>Actual Gravity</th>
+            <th>Efficiency</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class='single_right' style='text-align:center;vertical-align:middle;'>
+              <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
+                <%= number_with_precision(@recipe.maximum_mash_gravity, :precision => 0) %>
+              </div>
+              |
+              <div style='text-align:left !important; display:inline;float:right;width:45%;'>
+                &nbsp;
+              </div>
+            </td>
+            <td class='single_right' style='text-align:center;vertical-align:middle;'>
+              <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
+                <%= number_with_precision(@recipe.expected_mash_gravity, :precision => 0) %>
+                (<%=  number_with_precision(@recipe.expected_mash_gravity.to_sg.to_brix, :precision => 1) %>)
+              </div>
+              |
+              <div style='text-align:left !important; display:inline;float:right;width:45%;'>
+                &nbsp;
+              </div>
+            </td>
+            <td style='text-align:center;vertical-align:middle;'>
+              <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
+                <%= number_with_precision(@recipe.expected_efficiency, :precision => 2) %>
+              </div>
+              |
+              <div style='text-align:left !important; display:inline;float:right;width:45%;'>
+                &nbsp;
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p class='header'>Boil</p>
+      <table>
+        <tbody>
+          <tr>
+            <th>Duration: </th>
+            <td class='entry_line'><%= @recipe.boil_length %> minutes</td>
+          </tr>
+        </tbody>
+      </table>
+      <table>
+        <thead>
+          <tr>
+            <th style='border-bottom: solid transparent 1px !important;'>&nbsp;</th>
+            <th style='width:50%;'>Before</th>
+            <th style='width:50% !important;'>After</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Volume: </th>
+            <td class='single_right' style='text-align:center;vertical-align:middle;'>
+              <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
+                <%= number_with_precision(@recipe.pre_boil_volume, :precision => 2) %>
+              </div>
+              |
+              <div style='text-align:left !important; display:inline;float:right;width:45%;'>
+                &nbsp;
+              </div>
+            </td>
+            <td style='text-align:center;vertical-align:middle;'>
+              <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
+                <%= number_with_precision(@recipe.post_boil_volume, :precision => 2) %>
+              </div>
+              |
+              <div style='text-align:left !important; display:inline;float:right;width:45%;'>
+                &nbsp;
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>Gravity: </th>
+            <td class='single_right' style='text-align:center;vertical-align:middle;'>
+              <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
+                <%= number_with_precision(@recipe.pre_boil_gravity, :precision => 0) %>
+                (<%= number_with_precision(@recipe.pre_boil_gravity.to_sg.to_brix, :precision => 1) %>)
+              </div>
+              |
+              <div style='text-align:left !important; display:inline;float:right;width:45%;'>
+                &nbsp;
+              </div>
+            </td>
+            <td style='text-align:center;vertical-align:middle;'>
+              <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
+                <%= number_with_precision(@recipe.estimated_original_gravity, :precision => 0) %>
+                (<%= number_with_precision(@recipe.estimated_original_gravity.to_sg.to_brix, :precision => 1) %>)
+              </div>
+              |
+              <div style='text-align:left !important; display:inline;float:right;width:45%;'>
+                &nbsp;
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class='grid_14'>
+      <p class='header'>Recipe</p>
+      <p class='subheader'>Grist</p>
+      <table>
+        <thead>
+          <tr>
+            <th style='width:4em !important;'>Qty</th>
+            <th style='width:4em !important;'>Lb/kg</th>
+            <th style='width:4em !important;'>PPG</th>
+            <th>Ingredient</th>
+            <th style='width:4em !important;'>Color</th>
+            <th style='width:4em !important;'>Gravity<br />Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render :partial => "fermentable_row", :collection => @recipe.fermentables, :as => :fermentable %>
+        </tbody>
+      </table>
+      <p class='subheader'>Hops</p>
+      <table>
+        <thead>
+          <tr>
+            <th style='width:4em !important;'>Time</th>
+            <th style='width:3em !important;'>Qty</th>
+            <th style='width:3em !important;'>Oz/g</th>
+            <th>Ingredient</th>
+            <th style='width:4em !important;white-space: nowrap;'>&alpha; Acid</th>
+            <th style='width:4em !important;'>Form</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render :partial => 'hop_row', :collection => @recipe.first_wort_hops, :as => :hop %>
+          <%= render :partial => 'hop_row', :collection => @recipe.boil_hops, :as => :hop %>
+          <%= render :partial => 'hop_row', :collection => @recipe.aroma_hops, :as => :hop %>
+          <%= render :partial => 'hop_row', :collection => @recipe.dry_hops, :as => :hop %>
+        </tbody>
+      </table>
+      <% if @recipe.additions %>
+      <p class='subheader'>Additions</p>
+      <table>
+        <thead>
+          <tr>
+            <th style='width:4em !important;'>Time</th>
+            <th>Ingredient</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render :partial => 'addition_row', :collection => @recipe.additions, :as => :addition %>
+        </tbody>
+      </table>
+      <% end %>
+    </div>
+    <div class='clear'>&nbsp;</div>
+    <div class='grid_10'>
+      <p class='header'>Cooling</p>
+      <table>
+        <tbody>
+          <tr>
+            <th>Method: </th>
+            <td class='entry_line'>&nbsp;</td>
+          </tr>
+          <tr>
+            <th>Time Elapsed: </th>
+            <td class='entry_line'>&nbsp;</td>
+          </tr>
+          <tr>
+            <th>Final Temperature: </th>
+            <td class='entry_line'>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- <div class='grid_14' style='display:none;'>
+      <p class='header'>Whirlpool</p>
+      <table>
+        <thead>
+          <tr>
+            <th style='border-bottom: solid transparent 1px !important;'>&nbsp;</th>
+            <th style='width:50%;'>Hot</th>
+            <th style='width:50% !important;'>Cold</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Length: </th>
+            <td class='single_right'>&nbsp;</td>
+            <td class=''>&nbsp;</td>
+          </tr>
+          <tr>
+            <th>Hops Removed: </th>
+            <td class='single_right'>&nbsp;</td>
+            <td class=''>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+    <div class='grid_14'>
+      <p class='header'>Aeration/Oxygenation</p>
+      <table>
+        <tbody>
+          <tr>
+            <th>Method: </th>
+            <td class='entry_line'>&nbsp;</td>
+          </tr>
+          <tr>
+            <th>Rate: </th>
+            <td class='entry_line'>&nbsp;</td>
+          </tr>
+          <tr>
+            <th>Time: </th>
+            <td class='entry_line'>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class='grid_24'>
+      <p class='header'>Fermentation</p>
+    </div>
+    <div class='grid_6'>
+      <table>
+        <tbody>
+          <tr>
+            <th>Volume in fermenter: </th>
+            <td class='entry_line' style='text-align:center;vertical-align:middle;'>
+              <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
+                <%= number_with_precision(@recipe.fermenter_volume, :precision => 2) %>
+              </div>
+              |
+              <div style='text-align:left !important; display:inline;float:right;width:45%;'>
+                &nbsp;
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>Pitch Temperature: </th>
+            <td class='entry_line' style='text-align:center;vertical-align:middle;'>
+              <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
+                <%= number_with_precision(@recipe.fermentation_temperature, :precision => 0) %>
+              </div>
+              |
+              <div style='text-align:left !important; display:inline;float:right;width:45%;'>
+                &nbsp;
+              </div>
+            </td>
+          </tr>  
+          <tr>
+            <th>Pitch Time: </th>
+            <td class='entry_line'>&nbsp;</td>
+          </tr>  
+          <tr>
+            <th>OG: </th>
+            <td class='entry_line' style='text-align:center;vertical-align:middle;'>
+              <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
+                <%= number_with_precision(@recipe.estimated_original_gravity, :precision => 0) %>
+              </div>
+              |
+              <div style='text-align:left !important; display:inline;float:right;width:45%;'>
+                &nbsp;
+              </div>
+            </td>
+          </tr>   
+          <tr>
+            <th>FG: </th>
+            <td class='entry_line' style='text-align:center;vertical-align:middle;'>
+              <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
+                <%= number_with_precision(@recipe.estimated_final_gravity, :precision => 0) %>
+              </div>
+              |
+              <div style='text-align:left !important; display:inline;float:right;width:45%;'>
+                &nbsp;
+              </div>
+            </td>
+          </tr>   
+          <tr>
+            <th>ADF: </th>
+            <td class='entry_line' style='text-align:center;vertical-align:middle;'>
+              <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
+                <%= number_with_precision(@recipe.estimated_apparent_attenuation, :precision => 2) %>
+              </div>
+              |
+              <div style='text-align:left !important; display:inline;float:right;width:45%;'>
+                &nbsp;
+              </div>
+            </td>
+          </tr>   
+        </tbody>
+      </table>
+    </div>
+    <div class='grid_18'>
+      <img src="http://chart.apis.google.com/chart?chf=bg,s,ffffff&chxr=0,0,10|1,30,80&chxs=0,676767,11.5,0,lt,676767|1,676767,11.5,-0.5,lt,676767&chxt=x,y&chs=710x150&cht=lxy&chd=s:&chg=-1,10,0,0" width="710" height="150" alt="" />
+    </div>
+    <div class='grid_24'>
+      <p class='header'>Recipe Notes</p>
+      <p><%= @recipe.notes %></p>
+    </div>
+  </div>
+  <div class='container_24' style='page-break-before:always;'>
+    <div class='grid_18' style='text-align:left;margin-top:12pt;'>
+      <%= image_tag "logo.jpg" %>
+    </div>
+    <div class='clear'>&nbsp;</div>
+    <div class='grid_12 alpha'>
+      <p class='header'>
+        Water Worksheet
+      </p>
+      <table style='width:100%;'>
+        <tr>
+          <th>Grain Weight</th>
+          <td class='no_line'>&nbsp;</td>
+          <td style='width:80%;'>
+            <%= number_with_precision(@recipe.grain_weight, :precision => 2) %>lb
+          </td>
+        </tr>
+        <tr>
+          <th>Oz lost per pound</th>
+          <td class='no_line' style='text-align:right;'>x</td>
+          <td>
+            <%= number_with_precision(@recipe.water_absorbed_per_pound_of_grain, :precision => 0) %>
+          </td>
+        </tr>
+        <tr>
+          <th>Expected loss</th>
+          <td class='no_line' style='text-align:right;'>=</td>
+          <td>
+            <%= number_with_precision(@recipe.water_absorbed_by_grain, :precision => 0) %>
+          </td>
+        </tr>
+        <tr>
+          <th>&nbsp;</th>
+          <td class='no_line'>&nbsp;</td>
+          <td class='no_line'>&nbsp;</td>
+        </tr>
+        <tr>
+          <th>Mash Water</th>
+          <td class='no_line'>&nbsp;</td>
+          <td>
+            <%= number_with_precision(@recipe.mash_volume.to_oz, :precision => 0) %>
+            (<%= number_with_precision(@recipe.mash_volume, :precision => 2) %>)
+          </td>
+        </tr>
+        <tr>
+          <th>Lost to Grain</th>
+          <td class='no_line'>&ndash;</td>
+          <td>
+            <%= number_with_precision(@recipe.water_absorbed_by_grain, :precision => 0) %>
+          </td>
+        </tr>
+        <tr>
+          <th>Lost to False Bottom</th>
+          <td class='no_line'>&ndash;</td>
+          <td>
+            <%= number_with_precision(@recipe.water_lost_in_false_bottom, :precision => 0) %>
+          </td>
+        </tr>
+        <tr>
+          <th>Expected Runnings</th>
+          <td class='no_line' style='text-align:right;'>=</td>
+          <td>
+            <%= number_with_precision(@recipe.runnings, :precision => 0) %>
+          </td>
+        </tr>
+        <tr>
+          <th>&nbsp;</th>
+          <td class='no_line'>&nbsp;</td>
+          <td class='no_line'>&nbsp;</td>
+        </tr>
+        <tr>
+          <th>Boil Volume</th>
+          <td class='no_line'>&nbsp;</td>
+          <td>
+            <%= number_with_precision(@recipe.pre_boil_volume.to_oz, :precision => 0) %>
+          </td>
+        </tr>
+        <tr>
+          <th>Expected Runnings</th>
+          <td class='no_line' style='text-align:right;'>&ndash;</td>
+          <td>
+            <%= number_with_precision(@recipe.runnings, :precision => 0) %>
+          </td>
+        </tr>
+        <tr>
+          <th>Sparge Water</th>
+          <td class='no_line' style='text-align:right;'>=</td>
+          <td>
+            <%= number_with_precision(@recipe.sparge_water, :precision => 0) %>
+          </td>
+        </tr>
+        <tr>
+          <th>&nbsp;</th>
+          <td class='no_line'>&nbsp;</td>
+          <td class='no_line'>&nbsp;</td>
+        </tr>
+        <tr>
+          <th>Minutes of Boil</th>
+          <td class='no_line'>&nbsp;</td>
+          <td><%= @recipe.boil_length %></td>
+        </tr>
+        <tr>
+          <th>Evaporation Rate</th>
+          <td class='no_line' style='text-align:right;'>x</td>
+          <td><%= @recipe.evaporation_rate %></td>
+        </tr>
+        <tr>
+          <th>Total Evaporation Rate</th>
+          <td class='no_line' style='text-align:right;'>=</td>
+          <td>
+            <%= number_with_precision(@recipe.total_evaporation_rate, :precision => 2) %>
+          </td>
+        </tr>
+        <tr>
+          <th>&nbsp;</th>
+          <td class='no_line'>&nbsp;</td>
+          <td class='no_line'>&nbsp;</td>
+        </tr>
+        <tr>
+          <th>Boil Volume</th>
+          <td class='no_line'>&nbsp;</td>
+          <td>
+            <%= number_with_precision(@recipe.pre_boil_volume.to_oz, :precision => 0) %>
+          </td>
+        </tr>
+        <tr>
+          <th>Total Evaporation Rate</th>
+          <td class='no_line' style='text-align:right;'>x</td>
+          <td>
+            <%= number_with_precision(@recipe.total_evaporation_rate, :precision => 2) %>
+          </td>
+        </tr>
+        <tr>
+          <th>Post-Boil Volume</th>
+          <td class='no_line' style='text-align:right;'>=</td>
+          <td>
+            <%= number_with_precision(@recipe.post_boil_volume.to_oz, :precision => 0) %>
+          </td>
+        </tr>
+        <tr>
+          <th>&nbsp;</th>
+          <td class='no_line'>&nbsp;</td>
+          <td class='no_line'>&nbsp;</td>
+        </tr>
+        <tr>
+          <th>Post-Boil Volume</th>
+          <td class='no_line'>&nbsp;</td>
+          <td>
+            <%= number_with_precision(@recipe.post_boil_volume.to_oz, :precision => 0) %>
+          </td>
+        </tr>
+        <tr>
+          <th>Trub</th>
+          <td class='no_line' style='text-align:right;'>&ndash;</td>
+          <td>
+            <%= number_with_precision(@recipe.trub_loss.to_oz, :precision => 0) %>
+          </td>
+        </tr>
+        <tr>
+          <th>Absorbed by hops</th>
+          <td class='no_line' style='text-align:right;'>&ndash;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <th>Sample/Test loss</th>
+          <td class='no_line' style='text-align:right;'>&ndash;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <th>Fermenter Volume</th>
+          <td class='no_line' style='text-align:right;'>=</td>
+          <td>
+            <%= number_with_precision(@recipe.fermenter_volume.to_oz, :precision => 0) %>
+            (<%= number_with_precision(@recipe.fermenter_volume, :precision => 2) %>)
+          </td>
+        </tr>
+        <tr>
+          <th>&nbsp;</th>
+          <td class='no_line'>&nbsp;</td>
+          <td class='no_line'>&nbsp;</td>
+        </tr>
+        <tr>
+          <th>Fermenter Volume</th>
+          <td class='no_line'>&nbsp;</td>
+          <td>
+            <%= number_with_precision(@recipe.fermenter_volume.to_oz, :precision => 0) %>
+            (<%= number_with_precision(@recipe.fermenter_volume, :precision => 2) %>)
+          </td>
+        </tr>
+        <tr>
+          <th>Fermenter Loss</th>
+          <td class='no_line' style='text-align:right;'>&ndash;</td>
+          <td>
+            <%= number_with_precision(@recipe.fermenter_loss.to_oz, :precision => 0) %>
+            (<%= number_with_precision(@recipe.fermenter_loss, :precision => 2) %>)
+          </td>
+        </tr>
+        <tr>
+          <th>Packaging Volume</th>
+          <td class='no_line' style='text-align:right;'>=</td>
+          <td>
+            <%= number_with_precision(@recipe.packaging_volume.to_oz, :precision => 0) %>
+            (<%= number_with_precision(@recipe.packaging_volume, :precision => 2) %>)
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class='grid_12 omega'>
+      <p class='header'>
+        Forced Fermentation
+      </p>
+      <table>
+        <tbody>
+          <tr>
+            <th>Volume: </th>
+            <td class='entry_line'>&nbsp;</td>
+          </tr>
+          <tr>
+            <th>Final Gravity: </th>
+            <td class='entry_line'>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class='header'>
+        Fermentation Log
+      </p>
+      <% 20.times do |x| %>
+      <p class='entry_line'>&nbsp;</p>
+      <% end %>
+      <p class='header'>Carbonation</p>
+      <table>
+        <tbody>
+          <tr>
+            <th>Begun On: </th>
+            <td style='width:100%;'>&nbsp;</td>
+          </tr>
+          <tr>
+            <th>Method: </th>
+            <td style='width:100%;'>&nbsp;</td>
+          </tr>
+          <tr>
+            <th>Volume Carbonated: </th>
+            <td style='width:100%;'>&nbsp;</td>
+          </tr>
+          <tr>
+            <th>Volumes CO<sup>2</sup>: </th>
+            <td style='width:100%;'>&nbsp;</td>
+          </tr>
+          <tr>
+            <th>Primed With/CO<sup>2</sup> PSI: </th>
+            <td style='width:100%;'>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class='header'>Packaging</p>
+      <table>
+        <tbody>
+          <tr>
+            <th>Packaged On: </th>
+            <td style='width:100%;'>&nbsp;</td>
+          </tr>
+          <tr>
+            <th style='text-align:left;' colspan='2'>Packaged Into</th>
+          </tr>
+          <% ["12oz","500ml","22oz","750ml","64oz","5gal"].each do |size|%>
+          <tr>
+            <th><%= size %>: </th>
+            <td style='width:100%;'>&nbsp;</td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class='grid_24'>
+      <p class='header'>Brewing Notes</p>
+      <% 6.times do |x| %>
+        <p class='entry_line'>&nbsp;</p>
+      <% end %>
+    </div>

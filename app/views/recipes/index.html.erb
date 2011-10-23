@@ -1,0 +1,9 @@
+<ul>
+  <% @recipes.each do |recipe| %>
+    <li>
+      <%= recipe.batch_number %> - 
+      <%= link_to recipe.name, recipe_path(recipe.batch_number) %>
+    </li>
+  <% end %>
+</ul>
+<p><%= link_to "Create Recipe", new_recipe_path %></p>

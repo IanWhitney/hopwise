@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- BeerXML from Hopville.com -->
+<RECIPES>
+<RECIPE>
+  <VERSION>1</VERSION>
+  <NAME>TBD Tripel</NAME>
+  <TYPE>Partial Mash</TYPE>
+  <BREWER>Ian Whitney</BREWER>
+  <BATCH_SIZE>20.0626824552</BATCH_SIZE>
+  <BOIL_SIZE>26.497882488</BOIL_SIZE>
+  <BOIL_TIME>90</BOIL_TIME>
+  <EFFICIENCY>70.0</EFFICIENCY>
+  <FERMENTATION_STAGES>0</FERMENTATION_STAGES>
+  <STYLE>
+    <VERSION>1</VERSION>
+    <NAME>Belgian Tripel</NAME>
+    <CATEGORY>Belgian strong ale</CATEGORY>
+    <CATEGORY_NUMBER>18</CATEGORY_NUMBER>
+    <STYLE_LETTER>C</STYLE_LETTER>
+    <TYPE>Ale</TYPE>
+    <STYLE_GUIDE>BJCP</STYLE_GUIDE>
+    <OG_MIN>1.075</OG_MIN>
+    <OG_MAX>1.085</OG_MAX>
+    <FG_MIN>1.008</FG_MIN>
+    <FG_MAX>1.014</FG_MAX>
+    <IBU_MIN>20.0</IBU_MIN>
+    <IBU_MAX>40.0</IBU_MAX>
+    <COLOR_MIN>4.5</COLOR_MIN>
+    <COLOR_MAX>7.0</COLOR_MAX>
+    <ABV_MIN>7.5</ABV_MIN>
+    <ABV_MAX>9.5</ABV_MAX>
+  </STYLE>
+  <FERMENTABLES>
+    <FERMENTABLE>
+      <VERSION>1</VERSION>
+      <NAME>Belgian Pils</NAME>
+      <TYPE>Grain</TYPE>
+      <AMOUNT>3.17514659</AMOUNT>
+      <DISPLAY_AMOUNT>112 ozs</DISPLAY_AMOUNT>
+      <YIELD>80.4</YIELD>
+      <POTENTIAL>1.037</POTENTIAL>
+      <COLOR>2.0</COLOR>
+      <ADD_AFTER_BOIL>FALSE</ADD_AFTER_BOIL>
+      <ORIGIN></ORIGIN>
+      <NOTES></NOTES>
+      <COARSE_FINE_DIFF></COARSE_FINE_DIFF>
+      <MOISTURE></MOISTURE>
+      <DIASTATIC_POWER></DIASTATIC_POWER>
+      <PROTEIN></PROTEIN>
+      <MAX_IN_BATCH></MAX_IN_BATCH>
+      <RECOMMEND_MASH>TRUE</RECOMMEND_MASH>
+      <DISPLAY_COLOR>2L</DISPLAY_COLOR>
+    </FERMENTABLE>
+    <FERMENTABLE>
+      <VERSION>1</VERSION>
+      <NAME>Briess Pilsen Light DME</NAME>
+      <TYPE>Dry Extract</TYPE>
+      <AMOUNT>1.4741752025</AMOUNT>
+      <DISPLAY_AMOUNT>52 ozs</DISPLAY_AMOUNT>
+      <YIELD>91.3</YIELD>
+      <POTENTIAL>1.042</POTENTIAL>
+      <COLOR>2.0</COLOR>
+      <ADD_AFTER_BOIL>FALSE</ADD_AFTER_BOIL>
+      <ORIGIN></ORIGIN>
+      <NOTES></NOTES>
+      <COARSE_FINE_DIFF></COARSE_FINE_DIFF>
+      <MOISTURE></MOISTURE>
+      <DIASTATIC_POWER></DIASTATIC_POWER>
+      <PROTEIN></PROTEIN>
+      <MAX_IN_BATCH></MAX_IN_BATCH>
+      <RECOMMEND_MASH>FALSE</RECOMMEND_MASH>
+      <DISPLAY_COLOR>2L</DISPLAY_COLOR>
+    </FERMENTABLE>
+    <FERMENTABLE>
+      <VERSION>1</VERSION>
+      <NAME>Cane Sugar</NAME>
+      <TYPE>Sugar</TYPE>
+      <AMOUNT>1.133980925</AMOUNT>
+      <DISPLAY_AMOUNT>40 ozs</DISPLAY_AMOUNT>
+      <YIELD>97.8</YIELD>
+      <POTENTIAL>1.045</POTENTIAL>
+      <COLOR>0.0</COLOR>
+      <ADD_AFTER_BOIL>FALSE</ADD_AFTER_BOIL>
+      <ORIGIN></ORIGIN>
+      <NOTES></NOTES>
+      <COARSE_FINE_DIFF></COARSE_FINE_DIFF>
+      <MOISTURE></MOISTURE>
+      <DIASTATIC_POWER></DIASTATIC_POWER>
+      <PROTEIN></PROTEIN>
+      <MAX_IN_BATCH></MAX_IN_BATCH>
+      <RECOMMEND_MASH>FALSE</RECOMMEND_MASH>
+      <DISPLAY_COLOR>0L</DISPLAY_COLOR>
+    </FERMENTABLE>
+    <FERMENTABLE>
+      <VERSION>1</VERSION>
+      <NAME>Aromatic Malt</NAME>
+      <TYPE>Grain</TYPE>
+      <AMOUNT>0.1133980925</AMOUNT>
+      <DISPLAY_AMOUNT>4 ozs</DISPLAY_AMOUNT>
+      <YIELD>78.3</YIELD>
+      <POTENTIAL>1.036</POTENTIAL>
+      <COLOR>26.0</COLOR>
+      <ADD_AFTER_BOIL>FALSE</ADD_AFTER_BOIL>
+      <ORIGIN>Belgium</ORIGIN>
+      <NOTES>Provides a very strong malt flavor and aroma to your beer.</NOTES>
+      <COARSE_FINE_DIFF>1.5</COARSE_FINE_DIFF>
+      <MOISTURE>4.0</MOISTURE>
+      <DIASTATIC_POWER>29.0</DIASTATIC_POWER>
+      <PROTEIN>11.8</PROTEIN>
+      <MAX_IN_BATCH>10.0</MAX_IN_BATCH>
+      <RECOMMEND_MASH>TRUE</RECOMMEND_MASH>
+      <DISPLAY_COLOR>26L</DISPLAY_COLOR>
+    </FERMENTABLE>
+  </FERMENTABLES>
+  <HOPS>
+    <HOP>
+      <VERSION>1</VERSION>
+      <NAME>Tettnang</NAME>
+      <ALPHA>4.0</ALPHA>
+      <AMOUNT>0.051</AMOUNT>
+      <DISPLAY_AMOUNT>1.799 ozs</DISPLAY_AMOUNT>
+      <USE>Boil</USE>
+      <TIME>60</TIME>
+      <FORM>Pellet</FORM>
+      <NOTES>Use for: German ales, lagers and wheat beer
+Aroma: Noble, mild, fine, slightly spicy
+Substitutes: Saaz, Spalt
+Examples: Sam Adams Octoberfest, Anderson Valley ESB</NOTES>
+      <TYPE>aroma</TYPE>
+      <BETA>3.5</BETA>
+      <HSI>40.0</HSI>
+      <ORIGIN>Germany</ORIGIN>
+    </HOP>
+    <HOP>
+      <VERSION>1</VERSION>
+      <NAME>Saaz</NAME>
+      <ALPHA>3.5</ALPHA>
+      <AMOUNT>0.013</AMOUNT>
+      <DISPLAY_AMOUNT>0.459 ozs</DISPLAY_AMOUNT>
+      <USE>Boil</USE>
+      <TIME>10</TIME>
+      <FORM>Leaf</FORM>
+      <NOTES>Use for: Pilsners and Bohemian style lagers
+Aroma: Delicate, mild, clean, somewhat floral -- Noble hops
+Substitute: Tettnanger, Lublin
+Examples: Pulsner Urquell</NOTES>
+      <TYPE>aroma</TYPE>
+      <BETA>3.5</BETA>
+      <HSI>42.0</HSI>
+      <ORIGIN>Czech Republic</ORIGIN>
+    </HOP>
+  </HOPS>
+  <YEASTS>
+    <YEAST>
+      <VERSION>1</VERSION>
+      <NAME>White Labs Abbey Ale (WLP530)</NAME>
+      <TYPE>Ale</TYPE>
+      <FORM>Liquid</FORM>
+      <LABORATORY></LABORATORY>
+      <PRODUCT_ID></PRODUCT_ID>
+      <MIN_TEMPERATURE></MIN_TEMPERATURE>
+      <MAX_TEMPERATURE></MAX_TEMPERATURE>
+      <FLOCCULATION>Medium</FLOCCULATION>
+      <ATTENUATION>78.0</ATTENUATION>
+      <AMOUNT>0.135</AMOUNT>
+      <NOTES></NOTES>
+      <BEST_FOR></BEST_FOR>
+    </YEAST>
+    <YEAST>
+      <VERSION>1</VERSION>
+      <NAME>White Labs Belgian Style Ale Blend (WLP575)</NAME>
+      <TYPE>Ale</TYPE>
+      <FORM>Liquid</FORM>
+      <LABORATORY></LABORATORY>
+      <PRODUCT_ID></PRODUCT_ID>
+      <MIN_TEMPERATURE></MIN_TEMPERATURE>
+      <MAX_TEMPERATURE></MAX_TEMPERATURE>
+      <FLOCCULATION>Medium</FLOCCULATION>
+      <ATTENUATION>77.0</ATTENUATION>
+      <AMOUNT>0.135</AMOUNT>
+      <NOTES></NOTES>
+      <BEST_FOR></BEST_FOR>
+    </YEAST>
+  </YEASTS>
+  <MISCS>
+  </MISCS>
+  <WATERS/>
+  <MASHS>
+  </MASHS>
+  <NOTES>Adapted from &amp;apos;Brewing Classic Styles&amp;apos;</NOTES>
+  <TASTE_NOTES></TASTE_NOTES>
+  <TASTE_RATING></TASTE_RATING>
+  <EST_OG>1.081</EST_OG>
+  <EST_FG>1.018</EST_FG>
+  <EST_COLOR>5</EST_COLOR>
+  <IBU>34.0</IBU>
+  <IBU_METHOD>Rager</IBU_METHOD>
+  <EST_ABV>8.4</EST_ABV>
+  <CALORIES>266</CALORIES>
+  <DISPLAY_BATCH_SIZE>5.3 gal</DISPLAY_BATCH_SIZE>
+  <DISPLAY_BOIL_SIZE>7.0 gal</DISPLAY_BOIL_SIZE>
+</RECIPE>
+</RECIPES>

@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- BeerXML from Hopville.com -->
+<RECIPES>
+<RECIPE>
+  <VERSION>1</VERSION>
+  <NAME>Bitters the Monkey</NAME>
+  <TYPE>All Grain</TYPE>
+  <BREWER>Ian Whitney</BREWER>
+  <BATCH_SIZE>22.7</BATCH_SIZE>
+  <BOIL_SIZE>26.5</BOIL_SIZE>
+  <BOIL_TIME>60</BOIL_TIME>
+  <EFFICIENCY>70.0</EFFICIENCY>
+  <FERMENTATION_STAGES>1</FERMENTATION_STAGES>
+  <PRIMARY_AGE>7</PRIMARY_AGE>
+  <PRIMARY_TEMP>18.8889</PRIMARY_TEMP>
+  <STYLE>
+    <VERSION>1</VERSION>
+    <NAME>American Pale Ale</NAME>
+    <CATEGORY>American ale</CATEGORY>
+    <CATEGORY_NUMBER>10</CATEGORY_NUMBER>
+    <STYLE_LETTER>A</STYLE_LETTER>
+    <TYPE>Ale</TYPE>
+    <STYLE_GUIDE>BJCP</STYLE_GUIDE>
+    <OG_MIN>1.045</OG_MIN>
+    <OG_MAX>1.060</OG_MAX>
+    <FG_MIN>1.010</FG_MIN>
+    <FG_MAX>1.015</FG_MAX>
+    <IBU_MIN>30.0</IBU_MIN>
+    <IBU_MAX>45.0</IBU_MAX>
+    <COLOR_MIN>5.0</COLOR_MIN>
+    <COLOR_MAX>14.0</COLOR_MAX>
+    <ABV_MIN>4.5</ABV_MIN>
+    <ABV_MAX>6.2</ABV_MAX>
+  </STYLE>
+  <FERMENTABLES>
+    <FERMENTABLE>
+      <VERSION>1</VERSION>
+      <NAME>Golden Promise</NAME>
+      <TYPE>Grain</TYPE>
+      <AMOUNT>2.26796185</AMOUNT>
+      <DISPLAY_AMOUNT>80 ozs</DISPLAY_AMOUNT>
+      <YIELD>73.9</YIELD>
+      <POTENTIAL>1.034</POTENTIAL>
+      <COLOR>2.0</COLOR>
+      <ADD_AFTER_BOIL>FALSE</ADD_AFTER_BOIL>
+      <ORIGIN></ORIGIN>
+      <NOTES></NOTES>
+      <COARSE_FINE_DIFF></COARSE_FINE_DIFF>
+      <MOISTURE></MOISTURE>
+      <DIASTATIC_POWER></DIASTATIC_POWER>
+      <PROTEIN></PROTEIN>
+      <MAX_IN_BATCH></MAX_IN_BATCH>
+      <RECOMMEND_MASH>TRUE</RECOMMEND_MASH>
+      <DISPLAY_COLOR>2L</DISPLAY_COLOR>
+    </FERMENTABLE>
+    <FERMENTABLE>
+      <VERSION>1</VERSION>
+      <NAME>American Two-row Pale</NAME>
+      <TYPE>Grain</TYPE>
+      <AMOUNT>1.81436948</AMOUNT>
+      <DISPLAY_AMOUNT>64 ozs</DISPLAY_AMOUNT>
+      <YIELD>78.3</YIELD>
+      <POTENTIAL>1.036</POTENTIAL>
+      <COLOR>2.0</COLOR>
+      <ADD_AFTER_BOIL>FALSE</ADD_AFTER_BOIL>
+      <ORIGIN></ORIGIN>
+      <NOTES></NOTES>
+      <COARSE_FINE_DIFF></COARSE_FINE_DIFF>
+      <MOISTURE></MOISTURE>
+      <DIASTATIC_POWER></DIASTATIC_POWER>
+      <PROTEIN></PROTEIN>
+      <MAX_IN_BATCH></MAX_IN_BATCH>
+      <RECOMMEND_MASH>TRUE</RECOMMEND_MASH>
+      <DISPLAY_COLOR>2L</DISPLAY_COLOR>
+    </FERMENTABLE>
+    <FERMENTABLE>
+      <VERSION>1</VERSION>
+      <NAME>Munich Malt</NAME>
+      <TYPE>Grain</TYPE>
+      <AMOUNT>0.45359237</AMOUNT>
+      <DISPLAY_AMOUNT>16 ozs</DISPLAY_AMOUNT>
+      <YIELD>80.4</YIELD>
+      <POTENTIAL>1.037</POTENTIAL>
+      <COLOR>9.0</COLOR>
+      <ADD_AFTER_BOIL>FALSE</ADD_AFTER_BOIL>
+      <ORIGIN>Germany</ORIGIN>
+      <NOTES>Malty-sweet flavor characteristic and adds a reddish amber color to the beer.
+Does not contribute signficantly to body or head retention.
+Use for: Bock, Porter, Marzen, Oktoberfest beers</NOTES>
+      <COARSE_FINE_DIFF>1.3</COARSE_FINE_DIFF>
+      <MOISTURE>5.0</MOISTURE>
+      <DIASTATIC_POWER>72.0</DIASTATIC_POWER>
+      <PROTEIN>11.5</PROTEIN>
+      <MAX_IN_BATCH>80.0</MAX_IN_BATCH>
+      <RECOMMEND_MASH>TRUE</RECOMMEND_MASH>
+      <DISPLAY_COLOR>9L</DISPLAY_COLOR>
+    </FERMENTABLE>
+    <FERMENTABLE>
+      <VERSION>1</VERSION>
+      <NAME>Briess Caramel 10L</NAME>
+      <TYPE>Grain</TYPE>
+      <AMOUNT>0.45359237</AMOUNT>
+      <DISPLAY_AMOUNT>16 ozs</DISPLAY_AMOUNT>
+      <YIELD>73.9</YIELD>
+      <POTENTIAL>1.034</POTENTIAL>
+      <COLOR>10.0</COLOR>
+      <ADD_AFTER_BOIL>FALSE</ADD_AFTER_BOIL>
+      <ORIGIN></ORIGIN>
+      <NOTES></NOTES>
+      <COARSE_FINE_DIFF></COARSE_FINE_DIFF>
+      <MOISTURE></MOISTURE>
+      <DIASTATIC_POWER></DIASTATIC_POWER>
+      <PROTEIN></PROTEIN>
+      <MAX_IN_BATCH></MAX_IN_BATCH>
+      <RECOMMEND_MASH>TRUE</RECOMMEND_MASH>
+      <DISPLAY_COLOR>10L</DISPLAY_COLOR>
+    </FERMENTABLE>
+  </FERMENTABLES>
+  <HOPS>
+    <HOP>
+      <VERSION>1</VERSION>
+      <NAME>Centennial</NAME>
+      <ALPHA>10.0</ALPHA>
+      <AMOUNT>0.014</AMOUNT>
+      <DISPLAY_AMOUNT>0.494 ozs</DISPLAY_AMOUNT>
+      <USE>Dry Hop</USE>
+      <TIME>17280</TIME>
+      <FORM>Pellet</FORM>
+      <NOTES>Use for: General purpose bittering, aroma in American ales and Wheats
+Aroma: Floral, citrus aroma, spicy, clean bittering flavor
+Substitutes: Galena, Eroica, Nugget, Bullion
+Examples: Sierra Nevada Celebration Ale, Sierra Nevada Bigfoot</NOTES>
+      <TYPE>bittering</TYPE>
+      <BETA>4.0</BETA>
+      <HSI>40.0</HSI>
+      <ORIGIN>U.S.</ORIGIN>
+    </HOP>
+    <HOP>
+      <VERSION>1</VERSION>
+      <NAME>Simcoe</NAME>
+      <ALPHA>13.0</ALPHA>
+      <AMOUNT>0.014</AMOUNT>
+      <DISPLAY_AMOUNT>0.494 ozs</DISPLAY_AMOUNT>
+      <USE>Dry Hop</USE>
+      <TIME>17280</TIME>
+      <FORM>Pellet</FORM>
+      <NOTES>Pleasant hoppy aroma with low Co-Homulone and high alpha acid content(12-14 percent). Herbal, piney and citrusy.</NOTES>
+      <TYPE>both</TYPE>
+      <BETA>5.0</BETA>
+      <HSI>25.0</HSI>
+      <ORIGIN>U.S.</ORIGIN>
+    </HOP>
+    <HOP>
+      <VERSION>1</VERSION>
+      <NAME>Centennial</NAME>
+      <ALPHA>10.0</ALPHA>
+      <AMOUNT>0.014</AMOUNT>
+      <DISPLAY_AMOUNT>0.494 ozs</DISPLAY_AMOUNT>
+      <USE>Dry Hop</USE>
+      <TIME>7200</TIME>
+      <FORM>Pellet</FORM>
+      <NOTES>Use for: General purpose bittering, aroma in American ales and Wheats
+Aroma: Floral, citrus aroma, spicy, clean bittering flavor
+Substitutes: Galena, Eroica, Nugget, Bullion
+Examples: Sierra Nevada Celebration Ale, Sierra Nevada Bigfoot</NOTES>
+      <TYPE>bittering</TYPE>
+      <BETA>4.0</BETA>
+      <HSI>40.0</HSI>
+      <ORIGIN>U.S.</ORIGIN>
+    </HOP>
+    <HOP>
+      <VERSION>1</VERSION>
+      <NAME>Simcoe</NAME>
+      <ALPHA>13.0</ALPHA>
+      <AMOUNT>0.014</AMOUNT>
+      <DISPLAY_AMOUNT>0.494 ozs</DISPLAY_AMOUNT>
+      <USE>Dry Hop</USE>
+      <TIME>7200</TIME>
+      <FORM>Pellet</FORM>
+      <NOTES>Pleasant hoppy aroma with low Co-Homulone and high alpha acid content(12-14 percent). Herbal, piney and citrusy.</NOTES>
+      <TYPE>both</TYPE>
+      <BETA>5.0</BETA>
+      <HSI>25.0</HSI>
+      <ORIGIN>U.S.</ORIGIN>
+    </HOP>
+    <HOP>
+      <VERSION>1</VERSION>
+      <NAME>Warrior</NAME>
+      <ALPHA>15.0</ALPHA>
+      <AMOUNT>0.016</AMOUNT>
+      <DISPLAY_AMOUNT>0.564 ozs</DISPLAY_AMOUNT>
+      <USE>First Wort</USE>
+      <TIME>66.0</TIME>
+      <FORM>Pellet</FORM>
+      <NOTES>High alpha hops from Yakima Chief Ranches. Also called YCR-5.
+Best for: Ales, Stouts
+Substitutes: Nugget</NOTES>
+      <TYPE>both</TYPE>
+      <BETA>6.0</BETA>
+      <HSI>20.0</HSI>
+      <ORIGIN>U.S.</ORIGIN>
+    </HOP>
+    <HOP>
+      <VERSION>1</VERSION>
+      <NAME>Cascade</NAME>
+      <ALPHA>5.5</ALPHA>
+      <AMOUNT>0.014</AMOUNT>
+      <DISPLAY_AMOUNT>0.494 ozs</DISPLAY_AMOUNT>
+      <USE>Boil</USE>
+      <TIME>20</TIME>
+      <FORM>Pellet</FORM>
+      <NOTES>Use For: American ales and lagers
+Aroma: Strong spicy, floral, grapefriut character
+Substitutes: Centennial
+Examples: Sierra Nevade Pale Ale, Anchor Liberty Ale
+A hops with Northern Brewers Heritage</NOTES>
+      <TYPE>both</TYPE>
+      <BETA>6.0</BETA>
+      <HSI>50.0</HSI>
+      <ORIGIN>U.S.</ORIGIN>
+    </HOP>
+    <HOP>
+      <VERSION>1</VERSION>
+      <NAME>Cascade</NAME>
+      <ALPHA>5.5</ALPHA>
+      <AMOUNT>0.014</AMOUNT>
+      <DISPLAY_AMOUNT>0.494 ozs</DISPLAY_AMOUNT>
+      <USE>Boil</USE>
+      <TIME>1</TIME>
+      <FORM>Pellet</FORM>
+      <NOTES>Use For: American ales and lagers
+Aroma: Strong spicy, floral, grapefriut character
+Substitutes: Centennial
+Examples: Sierra Nevade Pale Ale, Anchor Liberty Ale
+A hops with Northern Brewers Heritage</NOTES>
+      <TYPE>both</TYPE>
+      <BETA>6.0</BETA>
+      <HSI>50.0</HSI>
+      <ORIGIN>U.S.</ORIGIN>
+    </HOP>
+  </HOPS>
+  <YEASTS>
+    <YEAST>
+      <VERSION>1</VERSION>
+      <NAME>Wyeast American Ale (1056)</NAME>
+      <TYPE>Ale</TYPE>
+      <FORM>Liquid</FORM>
+      <LABORATORY></LABORATORY>
+      <PRODUCT_ID></PRODUCT_ID>
+      <MIN_TEMPERATURE></MIN_TEMPERATURE>
+      <MAX_TEMPERATURE></MAX_TEMPERATURE>
+      <FLOCCULATION>Medium</FLOCCULATION>
+      <ATTENUATION>75.0</ATTENUATION>
+      <AMOUNT>0.135</AMOUNT>
+      <NOTES></NOTES>
+      <BEST_FOR></BEST_FOR>
+    </YEAST>
+  </YEASTS>
+  <MISCS>
+    <MISC>
+      <VERSION>1</VERSION>
+      <NAME>Campden Tablet</NAME>
+      <TYPE>other</TYPE>
+      <USE>boil</USE>
+      <TIME>70</TIME>
+      <AMOUNT>0</AMOUNT>
+      <AMOUNT_IS_WEIGHT>FALSE</AMOUNT_IS_WEIGHT>
+      <USE_FOR></USE_FOR>
+      <NOTES></NOTES>
+    </MISC>
+    <MISC>
+      <VERSION>1</VERSION>
+      <NAME>Whirlfloc Tablet</NAME>
+      <TYPE>fining</TYPE>
+      <USE>boil</USE>
+      <TIME>5</TIME>
+      <AMOUNT>0</AMOUNT>
+      <AMOUNT_IS_WEIGHT>FALSE</AMOUNT_IS_WEIGHT>
+      <USE_FOR>Clarity</USE_FOR>
+      <NOTES>Aids in clearing yeast and chill haze.  Easy to use tablet form.</NOTES>
+    </MISC>
+    <MISC>
+      <VERSION>1</VERSION>
+      <NAME>Yeast Nutrient</NAME>
+      <TYPE>other</TYPE>
+      <USE>boil</USE>
+      <TIME>5</TIME>
+      <AMOUNT>0</AMOUNT>
+      <AMOUNT_IS_WEIGHT>FALSE</AMOUNT_IS_WEIGHT>
+      <USE_FOR>Fermentation</USE_FOR>
+      <NOTES>Gives yeast nutrients for healthy fermentation.  Not needed for most beers, but good for those with a high percentage of adjuncts.  Add before yeast.</NOTES>
+    </MISC>
+  </MISCS>
+  <WATERS/>
+  <MASHS>
+    <MASH>
+      <VERSION>1</VERSION>
+      <NAME>Single Infusion</NAME>
+      <GRAIN_TEMP>18.3333</GRAIN_TEMP>
+      <NOTES></NOTES>
+      <MASH_STEPS>
+        <MASH_STEP>
+          <VERSION>1</VERSION>
+          <NAME>Conversion / Saccharification Rest</NAME>
+          <TYPE>infusion</TYPE>
+          <INFUSE_AMOUNT>13.0123530075</INFUSE_AMOUNT>
+          <STEP_TEMP>66.1111</STEP_TEMP>
+          <STEP_TIME>60</STEP_TIME>
+        </MASH_STEP>
+        <MASH_STEP>
+          <VERSION>1</VERSION>
+          <NAME>Mash-out</NAME>
+          <TYPE>infusion</TYPE>
+          <INFUSE_AMOUNT>5.61650171408814</INFUSE_AMOUNT>
+          <STEP_TEMP>75.0</STEP_TEMP>
+          <STEP_TIME>15</STEP_TIME>
+        </MASH_STEP>
+      </MASH_STEPS>
+    </MASH>
+  </MASHS>
+  <NOTES>Inspired by 21st Amendment&amp;apos;s Bitter American.</NOTES>
+  <TASTE_NOTES></TASTE_NOTES>
+  <TASTE_RATING></TASTE_RATING>
+  <EST_OG>1.044</EST_OG>
+  <EST_FG>1.011</EST_FG>
+  <EST_COLOR>5</EST_COLOR>
+  <IBU>42.3</IBU>
+  <IBU_METHOD>Rager</IBU_METHOD>
+  <EST_ABV>4.4</EST_ABV>
+  <CALORIES>145</CALORIES>
+  <DISPLAY_BATCH_SIZE>6.0 gal</DISPLAY_BATCH_SIZE>
+  <DISPLAY_BOIL_SIZE>7.0 gal</DISPLAY_BOIL_SIZE>
+</RECIPE>
+</RECIPES>
