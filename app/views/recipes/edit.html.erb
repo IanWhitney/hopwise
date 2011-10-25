@@ -1,0 +1,9 @@
+<% form_for @recipe, :html => { :multipart => true } do |f| %>
+  <%= f.label :batch_number  %>
+  <%= f.text_field :batch_number %><br />
+  <%= f.label :name %>
+  <%= f.text_field :name %><br />
+  <%= f.label :xml  %>
+  <%= f.file_field :xml %><br />
+  <%= f.submit %>
+<% end %>

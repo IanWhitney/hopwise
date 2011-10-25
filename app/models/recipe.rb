@@ -1,6 +1,9 @@
 class Recipe < ActiveRecord::Base
   has_attached_file :xml
   
+  validates_uniqueness_of :batch_number
+  validates_presence_of :xml, :name
+
   default_scope order('batch_number')
 
   def after_initialize
@@ -76,7 +79,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def fermenter_volume
-    Gallon.new(self.post_boil_volume - self.trub_loss)
+    Gallon.new(self.post_boil_volume - self.trub_loss - self.sample_loss)
   end
   
   def first_wort_hops
@@ -149,9 +152,13 @@ class Recipe < ActiveRecord::Base
     Gallon.new(mash_volume - water_absorbed_by_grain - water_lost_in_false_bottom)
   end
 
+  def sample_loss
+    Gallon.new(14.0/128)
+  end
+
   def sparge_water
-    (pre_boil_volume.to_oz) - runnings
-    # Gallon.new((pre_boil_volume - runnings))
+    # (pre_boil_volume.to_oz) - runnings
+    Gallon.new((pre_boil_volume - runnings))
   end
 
   def strike_temp(goal_temp, original_temp)

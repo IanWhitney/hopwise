@@ -2,7 +2,7 @@
   <% @recipes.each do |recipe| %>
     <li>
       <%= recipe.batch_number %> - 
-      <%= link_to recipe.name, recipe_path(recipe.batch_number) %>
+      <%= link_to recipe.name, recipe_path(recipe) %> (<%= link_to 'Edit', edit_recipe_path(recipe) %>)
     </li>
   <% end %>
 </ul>
