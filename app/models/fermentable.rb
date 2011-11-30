@@ -1,12 +1,13 @@
 class Fermentable
-  attr_accessor(:name,:potential,:color,:weight,:mashable,:type)
+  attr_accessor(:name,:potential,:color,:weight,:mashable,:type,:late_addition)
   def initialize(params = {})
     @name = params["NAME"]
     @potential = params["POTENTIAL"].to_f
     @color = params["COLOR"].to_f
-    @weight = params["AMOUNT"].to_f
+    @weight = params["AMOUNT"].to_f.kilograms
     @mashable = (params["RECOMMEND_MASH"] == "TRUE")
     @type = params["TYPE"]
+    @late_addition = (params["ADD_AFTER_BOIL"] == "TRUE")
   end
 
   def grain?
@@ -17,15 +18,11 @@ class Fermentable
     ((self.potential - 1) * 1000).round
   end
 
-  def kilograms
-    @weight.round(3)
-  end
-
-  def pounds
-    (@weight * 2.2046).round(2)
-  end
-
   def total_gravity_points
-    (gravity_points_per_pound * pounds).to_f
+    (gravity_points_per_pound * self.weight.to.pounds.value).to_f
+  end
+  
+  def late_addition?
+    @late_addition
   end
 end

@@ -1,6 +1,15 @@
 class Hop
   attr_accessor(:name, :weight, :alpha, :form)
 
+  def initialize(params = {})
+    @name = params["NAME"]
+    @weight = params["AMOUNT"].to_f.kilograms.to.grams
+    @alpha = params["ALPHA"]
+    @form = params["FORM"]
+    @time = params["TIME"]
+    @use = params["USE"]
+  end
+
   def aroma?
     @use == "Aroma"
   end
@@ -16,19 +25,6 @@ class Hop
   def first_wort?
     @use == "First Wort"
   end
-
-  def initialize(params = {})
-    @name = params["NAME"]
-    @weight = params["AMOUNT"].to_f
-    @alpha = params["ALPHA"]
-    @form = params["FORM"]
-    @time = params["TIME"]
-    @use = params["USE"]
-  end
-  
-  def grams
-    (@weight.round(4) * 1000)
-  end  
   
   def time
     self.dry? ? (@time.to_i / 60 / 24) : @time

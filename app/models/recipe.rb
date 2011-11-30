@@ -43,15 +43,18 @@ class Recipe < ActiveRecord::Base
   end
 
   def estimated_apparent_attenuation
-    100 * ((estimated_original_gravity - estimated_final_gravity) / estimated_original_gravity)
+    100 * ((estimated_original_gravity.to.brewers_points - estimated_final_gravity.to.brewers_points) / estimated_original_gravity.to.brewers_points)
   end
 
   def estimated_final_gravity
-    BrewersPoint.new((@xml["EST_FG"].to_f - 1) * 1000)
+    sg = @xml["EST_FG"].to_f.specific_gravity
   end
 
   def estimated_original_gravity
-    BrewersPoint.new(pre_boil_gravity / (1 - self.total_evaporation_rate))
+    mashed = (pre_boil_gravity.to.brewers_points / (1 - self.total_evaporation_rate)).brewers_points
+    sugars = (unmashed_gravity.to.brewers_points.to_f / post_boil_volume.to.gallons.to_f).brewers_points
+    total = (mashed + sugars).to_f
+    total.brewers_points.to.specific_gravity
   end
 
   def expected_efficiency
@@ -59,27 +62,23 @@ class Recipe < ActiveRecord::Base
   end
 
   def expected_mash_gravity
-    BrewersPoint.new(maximum_mash_gravity * expected_efficiency)
-  end
-
-  def evaporation_rate
-    0.15
+    (maximum_mash_gravity.to.brewers_points * expected_efficiency).to_f.brewers_points.to.specific_gravity
   end
 
   def fermentables
-    xml_collection_to_objects("fermentable")
+    # Doing fermentables.sort_by {|x| [x.late_addition? ? 1 : 0, x.weight]} gave me the fermentables sorted by weight in ascending, not descending order.
+    unsorted_fermentables = xml_collection_to_objects("fermentable")
+    a = unsorted_fermentables.reject {|x| x.late_addition?}
+    b = unsorted_fermentables.reject {|x| !x.late_addition?}
+    (a.sort {|x,y| y.weight <=> x.weight}) + (b.sort {|x,y| y.weight <=> x.weight})
   end
 
   def fermentation_temperature
     @xml["PRIMARY_TEMP"].to_i.to_fahrenheit
   end
 
-  def fermenter_loss
-    Gallon.new(0.50)
-  end
-
   def fermenter_volume
-    Gallon.new(self.post_boil_volume - self.trub_loss - self.sample_loss)
+    post_boil_volume.to_f - Brewhouse.trub_loss.to_f - Brewhouse.sample_loss.to_f
   end
   
   def first_wort_hops
@@ -91,7 +90,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def grain_weight
-    (grains.sum {|g| g.pounds})
+    (grains.sum {|g| g.weight.to_f})
   end
   
   def ibu
@@ -102,6 +101,10 @@ class Recipe < ActiveRecord::Base
     @xml["IBU_METHOD"]
   end
   
+  def mash
+    @xml["MASHS"]["MASH"]
+  end
+
   def mash_details_included?
     @xml["MASHS"] && @xml["MASHS"]["MASH"]
   end
@@ -109,35 +112,39 @@ class Recipe < ActiveRecord::Base
   def mash_temp
     if mash_details_included?
       begin
-        @xml["MASHS"]["MASH"]["MASH_STEPS"].first[1].first["STEP_TEMP"].to_f.to_fahrenheit
+        @xml["MASHS"]["MASH"]["MASH_STEPS"].first[1].first["STEP_TEMP"].to_f.celsius
       rescue
-        @xml["MASHS"]["MASH"]["MASH_STEPS"].first[1]["STEP_TEMP"].to_f.to_fahrenheit
+        @xml["MASHS"]["MASH"]["MASH_STEPS"].first[1]["STEP_TEMP"].to_f.celsius
       end
     end
   end
 
   def mash_thickness
-    2.5
+    2.6
   end
 
   def mash_volume
-    Gallon.new((grain_weight * 16 * mash_thickness) / 128)
+    (grain_weight * mash_thickness).litres
   end
 
   def maximum_mash_gravity
-    BrewersPoint.new(((grains.sum {|g| g.total_gravity_points}) / pre_boil_volume))
+    (((grains.sum {|g| g.total_gravity_points}) / pre_boil_volume.to.gallons.to_f)).brewers_points.to.specific_gravity
   end
 
   def notes
     @xml["NOTES"] ? (@xml["NOTES"]).html_safe : nil
   end
 
+  def unmashed_gravity
+    ((fermentables.reject {|f| f.grain?}).sum {|x| x.total_gravity_points}).brewers_points.to.specific_gravity
+  end
+
   def post_boil_volume
-    Gallon.new(pre_boil_volume - (pre_boil_volume * total_evaporation_rate))
+    (pre_boil_volume.to_f - (pre_boil_volume.to_f * total_evaporation_rate)).liters
   end
 
   def pre_boil_volume
-    Gallon.new(@xml["BOIL_SIZE"].to_f * 0.264172052)
+    @xml["BOIL_SIZE"].to_f.liters
   end
 
   def pre_boil_gravity
@@ -145,24 +152,19 @@ class Recipe < ActiveRecord::Base
   end
 
   def packaging_volume
-    Gallon.new(self.fermenter_volume - self.fermenter_loss)
+    (self.fermenter_volume.to_f - Brewhouse.fermenter_loss.to_f).liters
   end
 
   def runnings
-    Gallon.new(mash_volume - water_absorbed_by_grain - water_lost_in_false_bottom)
-  end
-
-  def sample_loss
-    Gallon.new(14.0/128)
+    (mash_volume.to_f - water_absorbed_by_grain - Brewhouse.water_lost_in_false_bottom.to_f).liters
   end
 
   def sparge_water
-    # (pre_boil_volume.to_oz) - runnings
-    Gallon.new((pre_boil_volume - runnings))
+    (pre_boil_volume.to_f - runnings.to_f).liters
   end
 
   def strike_temp(goal_temp, original_temp)
-    (0.2/(mash_thickness/2)) * (goal_temp - original_temp) + goal_temp
+    ((0.2/(2.5/2)) * (goal_temp - original_temp) + goal_temp).celsius
   end
 
   def style
@@ -170,23 +172,11 @@ class Recipe < ActiveRecord::Base
   end
 
   def total_evaporation_rate
-    ((boil_length.to_f / 60.0) * evaporation_rate)
-  end
-
-  def trub_loss
-    Gallon.new(0.75)
-  end
-
-  def water_absorbed_per_pound_of_grain
-    Gallon.new(13.0/128)
+    ((boil_length.to_f / 60.0) * Brewhouse.hourly_evaporation_rate)
   end
 
   def water_absorbed_by_grain
-    Gallon.new(grain_weight * water_absorbed_per_pound_of_grain)
-  end
-
-  def water_lost_in_false_bottom
-    Gallon.new(44.0/128)
+    grain_weight * Brewhouse.litres_water_absorbed_per_kg_of_grain.to_f
   end
 
   def yeasts

@@ -76,19 +76,19 @@
         <tbody>
           <tr>
             <th>Water/Mash: </th>
-            <td style='width:100%;'><%= @recipe.mash_thickness %>oz/oz</td>
+            <td style='width:100%;'><%= @recipe.mash_thickness %> l/kg</td>
           </tr>
           <tr>
             <th>Mash Volume: </th>
             <td style='width:100%;'>
-              <%= number_with_precision(@recipe.mash_volume.to_l, :precision => 2) %> l
+              <%= number_with_precision(@recipe.mash_volume, :precision => 2) %> l
             </td>
           </tr>
           <tr>
             <th>Mash Temp: </th>
             <td style='width:100%;'>
               <% if @recipe.mash_details_included? %>
-                <%= number_with_precision(@recipe.mash_temp, :precision => 0) %> F
+                <%= number_with_precision(@recipe.mash_temp.to.fahrenheit, :precision => 0) %> F
               <% else %>
                 &nbsp;
               <% end %>
@@ -98,7 +98,7 @@
             <th>Strike Temp: </th>
             <td style='width:100%;'>
               <% if @recipe.mash_details_included? %>
-                <%= number_with_precision(@recipe.strike_temp(@recipe.mash_temp,70), :precision => 0) %> F
+                <%= number_with_precision(@recipe.strike_temp(@recipe.mash_temp.to_f,70.fahrenheit.to.celsius.to_f).to.fahrenheit, :precision => 0) %> F
               <% else %>
                 &nbsp;
               <% end %>
@@ -108,7 +108,7 @@
             <th>Mash-Out Temp: </th>
             <td style='width:100%;'>
               <% if @recipe.mash_details_included? %>
-                <%= number_with_precision(@recipe.strike_temp(170,@recipe.mash_temp - 3) + 8, :precision => 0) %> F
+                <%= number_with_precision((@recipe.strike_temp(170.fahrenheit.to.celsius.to_f,@recipe.mash_temp.to_f - 3) + 8).to.fahrenheit, :precision => 0) %> F
               <% else %>
                 &nbsp;
               <% end %>
@@ -129,7 +129,7 @@
           <tr>
             <td class='single_right' style='text-align:center;vertical-align:middle;'>
               <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
-                <%= number_with_precision(@recipe.maximum_mash_gravity, :precision => 0) %>
+                <%= number_with_precision(@recipe.maximum_mash_gravity.to.brewers_points, :precision => 0) %>
               </div>
               |
               <div style='text-align:left !important; display:inline;float:right;width:45%;'>
@@ -138,8 +138,8 @@
             </td>
             <td class='single_right' style='text-align:center;vertical-align:middle;'>
               <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
-                <%= number_with_precision(@recipe.expected_mash_gravity, :precision => 0) %>
-                (<%=  number_with_precision(@recipe.expected_mash_gravity.to_sg.to_brix, :precision => 1) %>)
+                <%= number_with_precision(@recipe.expected_mash_gravity.to.brewers_points, :precision => 0) %>
+                (<%=  number_with_precision(@recipe.expected_mash_gravity.to.terril_brix, :precision => 1) %>)
               </div>
               |
               <div style='text-align:left !important; display:inline;float:right;width:45%;'>
@@ -180,7 +180,7 @@
             <th>Volume: </th>
             <td class='single_right' style='text-align:center;vertical-align:middle;'>
               <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
-                <%= number_with_precision(@recipe.pre_boil_volume.to_l, :precision => 2) %> l
+                <%= number_with_precision(@recipe.pre_boil_volume, :precision => 2) %> l
               </div>
               |
               <div style='text-align:left !important; display:inline;float:right;width:45%;'>
@@ -189,7 +189,7 @@
             </td>
             <td style='text-align:center;vertical-align:middle;'>
               <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
-                <%= number_with_precision(@recipe.post_boil_volume.to_l, :precision => 2) %> l
+                <%= number_with_precision(@recipe.post_boil_volume, :precision => 2) %> l
               </div>
               |
               <div style='text-align:left !important; display:inline;float:right;width:45%;'>
@@ -201,8 +201,8 @@
             <th>Gravity: </th>
             <td class='single_right' style='text-align:center;vertical-align:middle;'>
               <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
-                <%= number_with_precision(@recipe.pre_boil_gravity, :precision => 0) %>
-                (<%= number_with_precision(@recipe.pre_boil_gravity.to_sg.to_brix, :precision => 1) %>)
+                <%= number_with_precision(@recipe.pre_boil_gravity.to.brewers_points, :precision => 0) %>
+                (<%= number_with_precision(@recipe.pre_boil_gravity.to.terril_brix, :precision => 1) %>)
               </div>
               |
               <div style='text-align:left !important; display:inline;float:right;width:45%;'>
@@ -211,8 +211,8 @@
             </td>
             <td style='text-align:center;vertical-align:middle;'>
               <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
-                <%= number_with_precision(@recipe.estimated_original_gravity, :precision => 0) %>
-                (<%= number_with_precision(@recipe.estimated_original_gravity.to_sg.to_brix, :precision => 1) %>)
+                <%= number_with_precision(@recipe.estimated_original_gravity.to.brewers_points, :precision => 0) %>
+                (<%= number_with_precision(@recipe.estimated_original_gravity.to.terril_brix, :precision => 1) %>)
               </div>
               |
               <div style='text-align:left !important; display:inline;float:right;width:45%;'>
@@ -348,7 +348,7 @@
             <th>Volume in fermenter: </th>
             <td class='entry_line' style='text-align:center;vertical-align:middle;'>
               <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
-                <%= number_with_precision(@recipe.fermenter_volume.to_l, :precision => 2) %> l
+                <%= number_with_precision(@recipe.fermenter_volume, :precision => 2) %> l
               </div>
               |
               <div style='text-align:left !important; display:inline;float:right;width:45%;'>
@@ -376,7 +376,7 @@
             <th>OG: </th>
             <td class='entry_line' style='text-align:center;vertical-align:middle;'>
               <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
-                <%= number_with_precision(@recipe.estimated_original_gravity, :precision => 0) %>
+                <%= number_with_precision(@recipe.estimated_original_gravity.to.brewers_points, :precision => 0) %>
               </div>
               |
               <div style='text-align:left !important; display:inline;float:right;width:45%;'>
@@ -388,7 +388,7 @@
             <th>FG: </th>
             <td class='entry_line' style='text-align:center;vertical-align:middle;'>
               <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
-                <%= number_with_precision(@recipe.estimated_final_gravity, :precision => 0) %>
+                <%= number_with_precision(@recipe.estimated_final_gravity.to.brewers_points, :precision => 0) %>
               </div>
               |
               <div style='text-align:left !important; display:inline;float:right;width:45%;'>
@@ -433,21 +433,21 @@
           <th>Grain Weight</th>
           <td class='no_line'>&nbsp;</td>
           <td style='width:80%;'>
-            <%= number_with_precision(@recipe.grain_weight, :precision => 2) %>lb
+            <%= number_with_precision(@recipe.grain_weight, :precision => 2) %> kg
           </td>
         </tr>
         <tr>
-          <th>l lost per pound</th>
+          <th>l lost per kg</th>
           <td class='no_line' style='text-align:right;'>x</td>
           <td>
-            <%= number_with_precision(@recipe.water_absorbed_per_pound_of_grain.to_l, :precision => 2) %>
+            <%= number_with_precision(Brewhouse.litres_water_absorbed_per_kg_of_grain, :precision => 2) %>
           </td>
         </tr>
         <tr>
           <th>Expected loss</th>
           <td class='no_line' style='text-align:right;'>=</td>
           <td>
-            <%= number_with_precision(@recipe.water_absorbed_by_grain.to_l, :precision => 2) %> l
+            <%= number_with_precision(@recipe.water_absorbed_by_grain, :precision => 2) %> l
           </td>
         </tr>
         <tr>
@@ -459,28 +459,28 @@
           <th>Mash Water</th>
           <td class='no_line'>&nbsp;</td>
           <td>
-            <%= number_with_precision(@recipe.mash_volume.to_l, :precision => 2) %> l
+            <%= number_with_precision(@recipe.mash_volume, :precision => 2) %> l
           </td>
         </tr>
         <tr>
           <th>Lost to Grain</th>
           <td class='no_line'>&ndash;</td>
           <td>
-            <%= number_with_precision(@recipe.water_absorbed_by_grain.to_l, :precision => 2) %> l
+            <%= number_with_precision(@recipe.water_absorbed_by_grain, :precision => 2) %> l
           </td>
         </tr>
         <tr>
           <th>Lost to False Bottom</th>
           <td class='no_line'>&ndash;</td>
           <td>
-            <%= number_with_precision(@recipe.water_lost_in_false_bottom.to_l, :precision => 2) %> l
+            <%= number_with_precision(Brewhouse.water_lost_in_false_bottom, :precision => 2) %> l
           </td>
         </tr>
         <tr>
           <th>Expected Runnings</th>
           <td class='no_line' style='text-align:right;'>=</td>
           <td>
-            <%= number_with_precision(@recipe.runnings.to_l, :precision => 2) %> l
+            <%= number_with_precision(@recipe.runnings, :precision => 2) %> l
           </td>
         </tr>
         <tr>
@@ -492,21 +492,21 @@
           <th>Boil Volume</th>
           <td class='no_line'>&nbsp;</td>
           <td>
-            <%= number_with_precision(@recipe.pre_boil_volume.to_l, :precision => 2) %> l
+            <%= number_with_precision(@recipe.pre_boil_volume, :precision => 2) %> l
           </td>
         </tr>
         <tr>
           <th>Expected Runnings</th>
           <td class='no_line' style='text-align:right;'>&ndash;</td>
           <td>
-            <%= number_with_precision(@recipe.runnings.to_l, :precision => 2) %> l
+            <%= number_with_precision(@recipe.runnings, :precision => 2) %> l
           </td>
         </tr>
         <tr>
           <th>Sparge Water</th>
           <td class='no_line' style='text-align:right;'>=</td>
           <td>
-            <%= number_with_precision(@recipe.sparge_water.to_l, :precision => 2) %> l
+            <%= number_with_precision(@recipe.sparge_water, :precision => 2) %> l
           </td>
         </tr>
         <tr>
@@ -522,7 +522,7 @@
         <tr>
           <th>Hourly Evaporation Rate</th>
           <td class='no_line' style='text-align:right;'>x</td>
-          <td><%= @recipe.evaporation_rate %></td>
+          <td><%= Brewhouse.hourly_evaporation_rate %></td>
         </tr>
         <tr>
           <th>Total Evaporation Rate</th>
@@ -540,7 +540,7 @@
           <th>Boil Volume</th>
           <td class='no_line'>&nbsp;</td>
           <td>
-            <%= number_with_precision(@recipe.pre_boil_volume.to_l, :precision => 2) %> l
+            <%= number_with_precision(@recipe.pre_boil_volume, :precision => 2) %> l
           </td>
         </tr>
         <tr>
@@ -554,7 +554,7 @@
           <th>Post-Boil Volume</th>
           <td class='no_line' style='text-align:right;'>=</td>
           <td>
-            <%= number_with_precision(@recipe.post_boil_volume.to_l, :precision => 2) %> l
+            <%= number_with_precision(@recipe.post_boil_volume, :precision => 2) %> l
           </td>
         </tr>
         <tr>
@@ -566,14 +566,14 @@
           <th>Post-Boil Volume</th>
           <td class='no_line'>&nbsp;</td>
           <td>
-            <%= number_with_precision(@recipe.post_boil_volume.to_l, :precision => 2) %> l
+            <%= number_with_precision(@recipe.post_boil_volume, :precision => 2) %> l
           </td>
         </tr>
         <tr>
           <th>Trub</th>
           <td class='no_line' style='text-align:right;'>&ndash;</td>
           <td>
-            <%= number_with_precision(@recipe.trub_loss.to_l, :precision => 2) %> l
+            <%= number_with_precision(Brewhouse.trub_loss, :precision => 2) %> l
           </td>
         </tr>
         <tr>
@@ -585,14 +585,14 @@
           <th>Sample/Test loss</th>
           <td class='no_line' style='text-align:right;'>&ndash;</td>
           <td>
-            <%= number_with_precision(@recipe.sample_loss.to_l, :precision => 2) %> l
+            <%= number_with_precision(Brewhouse.sample_loss, :precision => 2) %> l
           </td>
         </tr>
         <tr>
           <th>Fermenter Volume</th>
           <td class='no_line' style='text-align:right;'>=</td>
           <td>
-            <%= number_with_precision(@recipe.fermenter_volume.to_l, :precision => 2) %> l
+            <%= number_with_precision(@recipe.fermenter_volume, :precision => 2) %> l
           </td>
         </tr>
         <tr>
@@ -604,21 +604,21 @@
           <th>Fermenter Volume</th>
           <td class='no_line'>&nbsp;</td>
           <td>
-            <%= number_with_precision(@recipe.fermenter_volume.to_l, :precision => 2) %> l
+            <%= number_with_precision(@recipe.fermenter_volume, :precision => 2) %> l
           </td>
         </tr>
         <tr>
           <th>Fermenter Loss</th>
           <td class='no_line' style='text-align:right;'>&ndash;</td>
           <td>
-            <%= number_with_precision(@recipe.fermenter_loss.to_l, :precision => 2) %> l
+            <%= number_with_precision(Brewhouse.fermenter_loss, :precision => 2) %> l
           </td>
         </tr>
         <tr>
           <th>Packaging Volume</th>
           <td class='no_line' style='text-align:right;'>=</td>
           <td>
-            <%= number_with_precision(@recipe.packaging_volume.to_l, :precision => 2) %> l
+            <%= number_with_precision(@recipe.packaging_volume, :precision => 2) %> l
           </td>
         </tr>
       </table>
