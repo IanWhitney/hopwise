@@ -160,7 +160,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def sparge_water
-    (pre_boil_volume.to_f - runnings.to_f).liters
+    (pre_boil_volume.to_f - runnings.to_f).liters + Brewhouse.sparge_loss
   end
 
   def strike_temp(goal_temp, original_temp)

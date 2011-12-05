@@ -105,7 +105,7 @@
             </td>
           </tr>
           <tr>
-            <th>Mash-Out Temp: </th>
+            <th>Sparge Temp: </th>
             <td style='width:100%;'>
               <% if @recipe.mash_details_included? %>
                 <%= number_with_precision((@recipe.strike_temp(170.fahrenheit.to.celsius.to_f,@recipe.mash_temp.to_f - 3) + 8).to.fahrenheit, :precision => 0) %> F
@@ -477,7 +477,7 @@
           </td>
         </tr>
         <tr>
-          <th>Expected Runnings</th>
+          <th>Expected First Runnings</th>
           <td class='no_line' style='text-align:right;'>=</td>
           <td>
             <%= number_with_precision(@recipe.runnings, :precision => 2) %> l
@@ -496,10 +496,17 @@
           </td>
         </tr>
         <tr>
-          <th>Expected Runnings</th>
+          <th>Expected First Runnings</th>
           <td class='no_line' style='text-align:right;'>&ndash;</td>
           <td>
             <%= number_with_precision(@recipe.runnings, :precision => 2) %> l
+          </td>
+        </tr>
+        <tr>
+          <th>Sparge Loss</th>
+          <td class='no_line' style='text-align:right;'>+</td>
+          <td>
+            <%= number_with_precision(Brewhouse.sparge_loss, :precision => 2) %> l
           </td>
         </tr>
         <tr>

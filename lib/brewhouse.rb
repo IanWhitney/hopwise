@@ -10,6 +10,10 @@ class Brewhouse
   def self.sample_loss
     (0.6).litres
   end
+  
+  def self.sparge_loss
+    (0.5).litres
+  end
 
   def self.trub_loss
     2.84.litres
