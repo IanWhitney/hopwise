@@ -7,6 +7,10 @@ class Brewhouse
     0.10
   end
   
+  def self.maximum_kettle_volume
+    (26.50).liters
+  end
+  
   def self.sample_loss
     (0.6).litres
   end

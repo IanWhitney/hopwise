@@ -94,7 +94,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def grain_weight
-    (grains.sum {|g| g.weight.to_f})
+    (grains.sum {|g| g.weight.to_f}).kilograms
   end
   
   def ibu
@@ -128,7 +128,12 @@ class Recipe < ActiveRecord::Base
   end
 
   def mash_volume
-    (grain_weight * mash_thickness).litres
+    calculated_mash_volume = (grain_weight.to_f * mash_thickness.to_f).litres
+    if calculated_mash_volume > Brewhouse.maximum_kettle_volume
+      Brewhouse.maximum_kettle_volume
+    else
+      calculated_mash_volume
+    end
   end
 
   def maximum_mash_gravity
@@ -160,17 +165,27 @@ class Recipe < ActiveRecord::Base
   end
 
   def runnings
-    (mash_volume.to_f - water_absorbed_by_grain - Brewhouse.water_lost_in_false_bottom.to_f).liters
+    (mash_volume.to_f - water_absorbed_by_grain.to_f - Brewhouse.water_lost_in_false_bottom.to_f).liters
   end
 
   def sparge_water
     (pre_boil_volume.to_f - runnings.to_f).liters + Brewhouse.sparge_loss
   end
 
-  def strike_temp(goal_temp, original_temp)
-    ((0.2/(2.5/2)) * (goal_temp - original_temp) + goal_temp).celsius
+  def strike_temp(goal_temp, original_temp, water_volume, grain_mass)
+    # ((0.2/(2.5/2)) * (goal_temp - original_temp) + goal_temp).celsius
+    goal_temp = goal_temp.celsius.to_f
+    original_temp = original_temp.celsius.to_f
+    water_volume = water_volume.liters.to_f
+    grain_mass = grain_mass.kilograms.to_f
+    
+    x = ((goal_temp * (water_volume + (0.4 * grain_mass)) - (0.4 * grain_mass * original_temp))/water_volume)
+    x.celsius
+     
+    # desired mash temp x (litres water + (0.4 x kg malt)) – (0.4 x kg malt x malt temp)
+    # litres water
   end
-
+  
   def style
     @xml["STYLE"]["NAME"]
   end
