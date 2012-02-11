@@ -4,7 +4,7 @@ class Brewhouse
   end
   
   def self.hourly_evaporation_rate
-    0.15
+    0.10
   end
   
   def self.sample_loss
@@ -12,18 +12,18 @@ class Brewhouse
   end
   
   def self.sparge_loss
-    (0.5).litres
+    (0.1).litres
   end
 
   def self.trub_loss
-    2.84.litres
+    (3.0).litres
   end
 
   def self.litres_water_absorbed_per_kg_of_grain
-    (0.85).litres
+    (0.91).litres
   end
   
   def self.water_lost_in_false_bottom
-    (1.30).litres
+    (1.20).litres
   end
 end

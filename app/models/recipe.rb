@@ -6,6 +6,10 @@ class Recipe < ActiveRecord::Base
 
   default_scope order('batch_number')
 
+  def abv
+    @xml["EST_ABV"]
+  end
+
   def after_initialize
     if !self.new_record?
       @xml = Hash.from_xml(File.open(self.xml.path))["RECIPES"]["RECIPE"]
@@ -31,7 +35,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def boil_length
-    @xml["BOIL_TIME"].to_i
+    @xml["BOIL_TIME"].to_f
   end
 
   def color
@@ -171,8 +175,16 @@ class Recipe < ActiveRecord::Base
     @xml["STYLE"]["NAME"]
   end
 
+  def expected_hourly_evaporation_rate
+    ((self.pre_boil_volume - @xml["BATCH_SIZE"].to_f.liters) / self.pre_boil_volume) / hours_of_boil
+  end
+
+  def hours_of_boil
+    (self.boil_length / 60.0)
+  end
+
   def total_evaporation_rate
-    ((boil_length.to_f / 60.0) * Brewhouse.hourly_evaporation_rate)
+    (hours_of_boil * self.expected_hourly_evaporation_rate)
   end
 
   def water_absorbed_by_grain

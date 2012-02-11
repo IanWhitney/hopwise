@@ -60,11 +60,11 @@
       <table>
         <tbody>
           <tr>
-            <th>Volume: </th>
+            <th>Yeast Viability:</th>
             <td style='width:100%;'>&nbsp;</td>
           </tr>
           <tr>
-            <th>Decanted: </th>
+            <th>Volume: </th>
             <td style='width:100%;'>&nbsp;</td>
           </tr>
         </tbody>
@@ -98,7 +98,7 @@
             <th>Strike Temp: </th>
             <td style='width:100%;'>
               <% if @recipe.mash_details_included? %>
-                <%= number_with_precision(@recipe.strike_temp(@recipe.mash_temp.to_f,70.fahrenheit.to.celsius.to_f).to.fahrenheit, :precision => 0) %> F
+                <%= number_with_precision(@recipe.strike_temp(@recipe.mash_temp.to_f,65.fahrenheit.to.celsius.to_f).to.fahrenheit, :precision => 0) %> F
               <% else %>
                 &nbsp;
               <% end %>
@@ -347,7 +347,7 @@
           <tr>
             <th>Volume in fermenter: </th>
             <td class='entry_line' style='text-align:center;vertical-align:middle;'>
-              <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
+              <div style='white-space:nowrap;text-align:middle !important; display:inline;float:left;width:45%;'>
                 <%= number_with_precision(@recipe.fermenter_volume, :precision => 2) %> l
               </div>
               |
@@ -408,6 +408,18 @@
               </div>
             </td>
           </tr>   
+          <tr>
+            <th>ABV: </th>
+            <td class='entry_line' style='text-align:center;vertical-align:middle;'>
+              <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
+                <%= number_with_precision(@recipe.abv, :precision => 2) %>
+              </div>
+              |
+              <div style='text-align:left !important; display:inline;float:right;width:45%;'>
+                &nbsp;
+              </div>
+            </td>
+          </tr>   
         </tbody>
       </table>
     </div>
@@ -426,8 +438,34 @@
     <div class='clear'>&nbsp;</div>
     <div class='grid_12 alpha'>
       <p class='header'>
-        Water Worksheet
+        Water
       </p>
+      <p class='subheader'>Treatment</p>
+      <table>
+        <thead>
+          <tr>
+            <th style='border-bottom: solid transparent 1px !important;'>&nbsp;</th>
+            <th style='width:25%;'>Mash</th>
+            <th style='width:25% !important;'>Sparge</th>
+            <th style='width:25% !important;'>Kettle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Gypsum: </th>
+            <td class='single_right' >&nbsp;</td>
+            <td class='single_right' >&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <th>Calcium Chloride: </th>
+            <td class='single_right' >&nbsp;</td>
+            <td class='single_right' >&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class='subheader'>Volume</p>
       <table style='width:100%;'>
         <tr>
           <th>Grain Weight</th>
@@ -444,7 +482,7 @@
           </td>
         </tr>
         <tr>
-          <th>Expected loss</th>
+          <th>Lost to Grain</th>
           <td class='no_line' style='text-align:right;'>=</td>
           <td>
             <%= number_with_precision(@recipe.water_absorbed_by_grain, :precision => 2) %> l
@@ -529,7 +567,7 @@
         <tr>
           <th>Hourly Evaporation Rate</th>
           <td class='no_line' style='text-align:right;'>x</td>
-          <td><%= Brewhouse.hourly_evaporation_rate %></td>
+          <td><%= number_with_precision(@recipe.expected_hourly_evaporation_rate, :precision => 2) %></td>
         </tr>
         <tr>
           <th>Total Evaporation Rate</th>
