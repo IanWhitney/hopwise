@@ -199,18 +199,9 @@ class Recipe < ActiveRecord::Base
     (pre_boil_volume.to_f - runnings.to_f).liters + Brewhouse.sparge_loss
   end
 
-  def strike_temp(goal_temp, original_temp, water_volume, grain_mass)
-    # ((0.2/(2.5/2)) * (goal_temp - original_temp) + goal_temp).celsius
-    goal_temp = goal_temp.celsius.to_f
-    original_temp = original_temp.celsius.to_f
-    water_volume = water_volume.liters.to_f
-    grain_mass = grain_mass.kilograms.to_f
-    
-    x = ((goal_temp * (water_volume + (0.4 * grain_mass)) - (0.4 * grain_mass * original_temp))/water_volume)
+  def strike_temp(goal_temp, current_temp, infusion_water_volume, grain_weight, current_water_volume = 0.0)
+    x = (infusion_water_volume.to_f * goal_temp.to_f - (0.4 * grain_weight.to_f + current_water_volume.to_f) * (current_temp.to_f - goal_temp.to_f)) / infusion_water_volume.to_f
     x.celsius
-     
-    # desired mash temp x (litres water + (0.4 x kg malt)) – (0.4 x kg malt x malt temp)
-    # litres water
   end
   
   def style

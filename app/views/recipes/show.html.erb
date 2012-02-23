@@ -105,14 +105,15 @@
             </td>
           </tr>
           <tr>
-            <th>Sparge Temp: <%=  %></th>
+            <th>Sparge Temp: </th>
             <td style='width:100%;'>
               <% if @recipe.mash_details_included? %>
                 <%= number_with_precision(@recipe.strike_temp(
                   170.fahrenheit.to.celsius,
                   @recipe.mash_temp,
                   @recipe.sparge_water,
-                  @recipe.grain_weight
+                  @recipe.grain_weight,
+                  @recipe.mash_volume
                 ).to.fahrenheit, :precision => 0) %> F
               <% else %>
                 &nbsp;
