@@ -23,11 +23,19 @@ class Brewhouse
     (3.0).litres
   end
 
+  def self.liters_water_absorbed_per_g_of_hops
+    (0.015).liters
+  end
+
   def self.litres_water_absorbed_per_kg_of_grain
     (0.91).litres
   end
-  
+
   def self.water_lost_in_false_bottom
     (1.20).litres
+  end
+  
+  def self.some_percentage
+    (0.63)
   end
 end

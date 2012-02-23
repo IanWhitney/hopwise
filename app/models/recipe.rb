@@ -30,6 +30,10 @@ class Recipe < ActiveRecord::Base
     all_hops.reject {|h| !h.aroma?}
   end
 
+  def batch_size
+    @xml["BATCH_SIZE"].to_f.liters
+  end
+  
   def boil_hops
     all_hops.reject {|h| !h.boil?}
   end
@@ -51,10 +55,14 @@ class Recipe < ActiveRecord::Base
   end
 
   def estimated_final_gravity
-    sg = @xml["EST_FG"].to_f.specific_gravity
+    @xml["EST_FG"].to_f.specific_gravity
+  end
+  
+  def estimated_original_gravity
+    @xml["EST_OG"].to_f.specific_gravity
   end
 
-  def estimated_original_gravity
+  def post_boil_original_gravity
     mashed = (pre_boil_gravity.to.brewers_points / (1 - self.total_evaporation_rate)).brewers_points
     sugars = (unmashed_gravity.to.brewers_points.to_f / post_boil_volume.to.gallons.to_f).brewers_points
     total = (mashed + sugars).to_f
@@ -63,6 +71,11 @@ class Recipe < ActiveRecord::Base
 
   def expected_efficiency
     @xml["EFFICIENCY"] ? (@xml["EFFICIENCY"].to_f / 100) : 0.70
+  end
+
+  def expected_first_runnings_gravity
+    expected_total_points_in_first_runnings = Brewhouse.some_percentage * (self.pre_boil_gravity.to.brewers_points.to_f * self.pre_boil_volume.to.gallons.to_f)
+    (expected_total_points_in_first_runnings / self.runnings.to.gallons.to_f).brewers_points.to.specific_gravity
   end
 
   def expected_mash_gravity
@@ -82,7 +95,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def fermenter_volume
-    post_boil_volume.to_f - Brewhouse.trub_loss.to_f - Brewhouse.sample_loss.to_f
+    (self.wort_to_fermenter.to_f + self.make_up_water.to_f).liters
   end
   
   def first_wort_hops
@@ -103,6 +116,16 @@ class Recipe < ActiveRecord::Base
 
   def ibu_method
     @xml["IBU_METHOD"]
+  end
+  
+  def make_up_water
+    x = (self.batch_size - self.post_boil_volume).to_f
+    if x > 0.5
+      total_volume = (self.wort_to_fermenter.to_f * self.post_boil_original_gravity.to.brewers_points.to_f / estimated_original_gravity.to.brewers_points)
+      (total_volume - self.wort_to_fermenter.to_f).liters
+    else
+      0.liters
+    end
   end
   
   def mash
@@ -142,6 +165,10 @@ class Recipe < ActiveRecord::Base
 
   def notes
     @xml["NOTES"] ? (@xml["NOTES"]).html_safe : nil
+  end
+
+  def partial_boil?
+    self.make_up_water > (0.0).liters
   end
 
   def unmashed_gravity
@@ -191,7 +218,8 @@ class Recipe < ActiveRecord::Base
   end
 
   def expected_hourly_evaporation_rate
-    ((self.pre_boil_volume - @xml["BATCH_SIZE"].to_f.liters) / self.pre_boil_volume) / hours_of_boil
+    self.hours_of_boil * Brewhouse.hourly_evaporation_rate
+    # ((self.pre_boil_volume - @xml["BATCH_SIZE"].to_f.liters) / self.pre_boil_volume) / hours_of_boil
   end
 
   def hours_of_boil
@@ -204,6 +232,18 @@ class Recipe < ActiveRecord::Base
 
   def water_absorbed_by_grain
     grain_weight * Brewhouse.litres_water_absorbed_per_kg_of_grain.to_f
+  end
+
+  def water_absorbed_by_hops
+    loss = 0.0
+    self.boil_hops.each do |h|
+      loss += (Brewhouse.liters_water_absorbed_per_g_of_hops.to_f * h.weight.to_f) if h.leaf?
+    end
+    loss.liters
+  end
+
+  def wort_to_fermenter
+    (post_boil_volume.to_f - Brewhouse.trub_loss.to_f - Brewhouse.sample_loss.to_f - self.water_absorbed_by_hops.to_f).liters
   end
 
   def yeasts

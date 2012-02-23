@@ -31,7 +31,7 @@
           <tr>
             <th>Batch Size: </th>
             <td class='entry_line' colspan='3'>
-              <%= number_with_precision(@recipe.post_boil_volume, :precision => 2) %>
+              <%= number_with_precision(@recipe.batch_size, :precision => 2) %>
             </td>
           </tr>
           <tr>
@@ -216,8 +216,8 @@
             </td>
             <td style='text-align:center;vertical-align:middle;'>
               <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
-                <%= number_with_precision(@recipe.estimated_original_gravity.to.brewers_points, :precision => 0) %>
-                (<%= number_with_precision(@recipe.estimated_original_gravity.to.terril_brix, :precision => 1) %>)
+                <%= number_with_precision(@recipe.post_boil_original_gravity.to.brewers_points, :precision => 0) %>
+                (<%= number_with_precision(@recipe.post_boil_original_gravity.to.terril_brix, :precision => 1) %>)
               </div>
               |
               <div style='text-align:left !important; display:inline;float:right;width:45%;'>
@@ -524,6 +524,10 @@
           <td class='no_line' style='text-align:right;'>=</td>
           <td>
             <%= number_with_precision(@recipe.runnings, :precision => 2) %> l
+            (
+              <%= number_with_precision(@recipe.runnings.to_f * @recipe.expected_first_runnings_gravity.to_f, :precision => 2) %> kg @
+              <%= number_with_precision(@recipe.expected_first_runnings_gravity.to.brewers_points, :precision => 2) %>
+            )
           </td>
         </tr>
         <tr>
@@ -629,7 +633,7 @@
         <tr>
           <th>Absorbed by hops</th>
           <td class='no_line' style='text-align:right;'>&ndash;</td>
-          <td>&nbsp;</td>
+          <td><%= number_with_precision(@recipe.water_absorbed_by_hops, :precision => 2) %> l</td>
         </tr>
         <tr>
           <th>Sample/Test loss</th>
@@ -638,6 +642,22 @@
             <%= number_with_precision(Brewhouse.sample_loss, :precision => 2) %> l
           </td>
         </tr>
+<% if @recipe.partial_boil? %>
+        <tr>
+          <th>Wort to Fermenter</th>
+          <td class='no_line' style='text-align:right;'>=</td>
+          <td>
+            <%= number_with_precision(@recipe.wort_to_fermenter, :precision => 2) %> l
+          </td>
+        </tr>
+        <tr>
+          <th>Make-Up Water</th>
+          <td class='no_line' style='text-align:right;'>+</td>
+          <td>
+            <%= number_with_precision(@recipe.make_up_water, :precision => 2) %> l
+          </td>
+        </tr>
+<% end %>
         <tr>
           <th>Fermenter Volume</th>
           <td class='no_line' style='text-align:right;'>=</td>
@@ -658,10 +678,18 @@
           </td>
         </tr>
         <tr>
+          <th>Number of Fermenters</th>
+          <td class='no_line'>&nbsp;</td>
+          <td>
+            <%= number_with_precision((@recipe.fermenter_volume.to_f / 22.71).ceil, :precision => 0) %>
+          </td>
+        </tr>
+        
+        <tr>
           <th>Fermenter Loss</th>
           <td class='no_line' style='text-align:right;'>&ndash;</td>
           <td>
-            <%= number_with_precision(Brewhouse.fermenter_loss, :precision => 2) %> l
+            <%= number_with_precision((@recipe.fermenter_volume.to_f / 22.71).ceil * Brewhouse.fermenter_loss.to_f, :precision => 2) %> l
           </td>
         </tr>
         <tr>

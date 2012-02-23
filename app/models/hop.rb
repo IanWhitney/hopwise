@@ -26,6 +26,10 @@ class Hop
     @use == "First Wort"
   end
   
+  def leaf?
+    @form.downcase == "leaf"
+  end
+  
   def time
     self.dry? ? (@time.to_i / 60 / 24) : @time
   end 
