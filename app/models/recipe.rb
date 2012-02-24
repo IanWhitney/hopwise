@@ -74,7 +74,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def expected_first_runnings_gravity
-    expected_total_points_in_first_runnings = Brewhouse.some_percentage * (self.pre_boil_gravity.to.brewers_points.to_f * self.pre_boil_volume.to.gallons.to_f)
+    expected_total_points_in_first_runnings = Brewhouse.percent_gravity_extracted_in_first_runnings * (self.pre_boil_gravity.to.brewers_points.to_f * self.pre_boil_volume.to.gallons.to_f)
     (expected_total_points_in_first_runnings / self.expected_first_runnings_volume.to.gallons.to_f).brewers_points.to.specific_gravity
   end
 
@@ -83,7 +83,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def expected_second_runnings_gravity
-    expected_total_points_in_second_runnings = (1.0 - Brewhouse.some_percentage) * (self.pre_boil_gravity.to.brewers_points.to_f * self.pre_boil_volume.to.gallons.to_f)
+    expected_total_points_in_second_runnings = (1.0 - Brewhouse.percent_gravity_extracted_in_first_runnings) * (self.pre_boil_gravity.to.brewers_points.to_f * self.pre_boil_volume.to.gallons.to_f)
     (expected_total_points_in_second_runnings / (self.expected_second_runnings_volume.to.gallons.to_f)).brewers_points.to.specific_gravity
   end
 

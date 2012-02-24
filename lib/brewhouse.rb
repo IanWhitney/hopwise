@@ -35,7 +35,7 @@ class Brewhouse
     (1.20).litres
   end
   
-  def self.some_percentage
+  def self.percent_gravity_extracted_in_first_runnings
     (0.63)
   end
 end
