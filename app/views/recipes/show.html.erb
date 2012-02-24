@@ -484,13 +484,19 @@
         <tbody>
           <tr>
             <th>First: </th>
-            <td class='single_right' ><%= number_with_precision(@recipe.expected_first_runnings_gravity.to.brewers_points, :precision => 2) %></td>
+            <td class='single_right' >
+              <%= number_with_precision(@recipe.expected_first_runnings_gravity.to.brewers_points, :precision => 2) %>
+              (<%= number_with_precision(@recipe.expected_first_runnings_gravity.to.terril_brix, :precision => 1) %>)
+            </td>
             <td class='single_right' ><%= number_with_precision(@recipe.expected_first_runnings_volume.to_f * @recipe.expected_first_runnings_gravity.to_f, :precision => 2) %> kg</td>
             <td><%= number_with_precision(@recipe.expected_first_runnings_volume, :precision => 2) %> l</td>
           </tr>
           <tr>
             <th>Second: </th>
-            <td class='single_right' ><%= number_with_precision(@recipe.expected_second_runnings_gravity.to.brewers_points, :precision => 2) %></td>
+            <td class='single_right' >
+              <%= number_with_precision(@recipe.expected_second_runnings_gravity.to.brewers_points, :precision => 2) %>
+              (<%= number_with_precision(@recipe.expected_second_runnings_gravity.to.terril_brix, :precision => 1) %>)
+            </td>
             <td class='single_right' ><%= number_with_precision(@recipe.expected_second_runnings_volume.to_f * @recipe.expected_second_runnings_gravity.to_f, :precision => 2) %> kg</td>
             <td><%= number_with_precision(@recipe.expected_second_runnings_volume, :precision => 2) %> l</td>
           </tr>

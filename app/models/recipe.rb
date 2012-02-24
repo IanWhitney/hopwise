@@ -1,23 +1,18 @@
 class Recipe < ActiveRecord::Base
   has_attached_file :xml
+  validates_attachment_presence :xml
   
   validates_uniqueness_of :batch_number
-  validates_presence_of :xml, :name
+  validates_presence_of :name
 
   default_scope order('batch_number')
 
   def abv
-    @xml["EST_ABV"]
-  end
-
-  def after_initialize
-    if !self.new_record?
-      @xml = Hash.from_xml(File.open(self.xml.path))["RECIPES"]["RECIPE"]
-    end
+    beerxml["EST_ABV"]
   end
 
   def additions
-    if @xml["MISCS"].respond_to?(:keys) 
+    if beerxml["MISCS"].respond_to?(:keys) 
       xml_collection_to_objects("misc").sort! {|a,b| b.time <=> a.time }
     end
   end
@@ -31,7 +26,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def batch_size
-    @xml["BATCH_SIZE"].to_f.litres
+    beerxml["BATCH_SIZE"].to_f.litres
   end
   
   def boil_hops
@@ -39,11 +34,11 @@ class Recipe < ActiveRecord::Base
   end
 
   def boil_length
-    @xml["BOIL_TIME"].to_f
+    beerxml["BOIL_TIME"].to_f
   end
 
   def color
-    @xml["EST_COLOR"]
+    beerxml["EST_COLOR"]
   end
   
   def dry_hops
@@ -55,11 +50,11 @@ class Recipe < ActiveRecord::Base
   end
 
   def estimated_final_gravity
-    @xml["EST_FG"].to_f.specific_gravity
+    beerxml["EST_FG"].to_f.specific_gravity
   end
   
   def estimated_original_gravity
-    @xml["EST_OG"].to_f.specific_gravity
+    beerxml["EST_OG"].to_f.specific_gravity
   end
 
   def post_boil_original_gravity
@@ -70,7 +65,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def expected_efficiency
-    @xml["EFFICIENCY"] ? (@xml["EFFICIENCY"].to_f / 100) : 0.70
+    beerxml["EFFICIENCY"] ? (beerxml["EFFICIENCY"].to_f / 100) : 0.70
   end
 
   def expected_first_runnings_gravity
@@ -104,7 +99,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def fermentation_temperature
-    @xml["PRIMARY_TEMP"].to_i.to_fahrenheit
+    beerxml["PRIMARY_TEMP"].to_i.to_fahrenheit
   end
 
   def fermenter_volume
@@ -124,11 +119,11 @@ class Recipe < ActiveRecord::Base
   end
   
   def ibu
-    @xml["IBU"]
+    beerxml["IBU"]
   end
 
   def ibu_method
-    @xml["IBU_METHOD"]
+    beerxml["IBU_METHOD"]
   end
   
   def make_up_water
@@ -142,19 +137,19 @@ class Recipe < ActiveRecord::Base
   end
   
   def mash
-    @xml["MASHS"]["MASH"]
+    beerxml["MASHS"]["MASH"]
   end
 
   def mash_details_included?
-    @xml["MASHS"] && @xml["MASHS"]["MASH"]
+    beerxml["MASHS"] && beerxml["MASHS"]["MASH"]
   end
 
   def mash_temp
     if mash_details_included?
       begin
-        @xml["MASHS"]["MASH"]["MASH_STEPS"].first[1].first["STEP_TEMP"].to_f.celsius
+        beerxml["MASHS"]["MASH"]["MASH_STEPS"].first[1].first["STEP_TEMP"].to_f.celsius
       rescue
-        @xml["MASHS"]["MASH"]["MASH_STEPS"].first[1]["STEP_TEMP"].to_f.celsius
+        beerxml["MASHS"]["MASH"]["MASH_STEPS"].first[1]["STEP_TEMP"].to_f.celsius
       end
     end
   end
@@ -177,7 +172,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def notes
-    @xml["NOTES"] ? (@xml["NOTES"]).html_safe : nil
+    beerxml["NOTES"] ? (beerxml["NOTES"]).html_safe : nil
   end
 
   def partial_boil?
@@ -193,7 +188,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def pre_boil_volume
-    @xml["BOIL_SIZE"].to_f.litres
+    beerxml["BOIL_SIZE"].to_f.litres
   end
 
   def pre_boil_gravity
@@ -214,12 +209,12 @@ class Recipe < ActiveRecord::Base
   end
   
   def style
-    @xml["STYLE"]["NAME"]
+    beerxml["STYLE"]["NAME"]
   end
 
   def expected_hourly_evaporation_rate
     self.hours_of_boil * Brewhouse.hourly_evaporation_rate
-    # ((self.pre_boil_volume - @xml["BATCH_SIZE"].to_f.litres) / self.pre_boil_volume) / hours_of_boil
+    # ((self.pre_boil_volume - beerxml["BATCH_SIZE"].to_f.litres) / self.pre_boil_volume) / hours_of_boil
   end
 
   def hours_of_boil
@@ -251,16 +246,20 @@ class Recipe < ActiveRecord::Base
   end
 private
 
+  def beerxml
+    @beerxml ||= Hash.from_xml(File.open(self.xml.path))["RECIPES"]["RECIPE"]
+  end
+
   def flattened_array_or_hash(key)
-    if @xml[key].respond_to?(:values)
-      if @xml[key].values.first.respond_to?(:each_value)
-        [@xml[key].values.first]
+    if beerxml[key].respond_to?(:values)
+      if beerxml[key].values.first.respond_to?(:each_value)
+        [beerxml[key].values.first]
       else
-        @xml[key].values.first
+        beerxml[key].values.first
       end
     else
       # Added to fix a problem with importing a Northern Brewer xml file that had 4 duplicate entries in "HOPS" that were stored in an array, not a hash.
-      @xml[key].first.values.first
+      beerxml[key].first.values.first
     end
   end
     
@@ -271,4 +270,5 @@ private
     end
     object_collection
   end
+  
 end
