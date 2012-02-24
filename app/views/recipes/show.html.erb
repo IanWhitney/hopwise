@@ -113,7 +113,7 @@
                   @recipe.mash_temp,
                   @recipe.sparge_water,
                   @recipe.grain_weight,
-                  @recipe.mash_volume
+                  Brewhouse.water_lost_in_false_bottom
                 ).to.fahrenheit, :precision => 0) %> F
               <% else %>
                 &nbsp;
@@ -471,6 +471,31 @@
           </tr>
         </tbody>
       </table>
+      <p class='subheader'>Expected Runnings</p>
+      <table>
+        <thead>
+          <tr>
+            <th style='border-bottom: solid transparent 1px !important;'>&nbsp;</th>
+            <th style='width:25%;'>Gravity</th>
+            <th style='width:25% !important;'>Weight</th>
+            <th style='width:25% !important;'>Volume</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>First: </th>
+            <td class='single_right' ><%= number_with_precision(@recipe.expected_first_runnings_gravity.to.brewers_points, :precision => 2) %></td>
+            <td class='single_right' ><%= number_with_precision(@recipe.expected_first_runnings_volume.to_f * @recipe.expected_first_runnings_gravity.to_f, :precision => 2) %> kg</td>
+            <td><%= number_with_precision(@recipe.expected_first_runnings_volume, :precision => 2) %> l</td>
+          </tr>
+          <tr>
+            <th>Second: </th>
+            <td class='single_right' ><%= number_with_precision(@recipe.expected_second_runnings_gravity.to.brewers_points, :precision => 2) %></td>
+            <td class='single_right' ><%= number_with_precision(@recipe.expected_second_runnings_volume.to_f * @recipe.expected_second_runnings_gravity.to_f, :precision => 2) %> kg</td>
+            <td><%= number_with_precision(@recipe.expected_second_runnings_volume, :precision => 2) %> l</td>
+          </tr>
+        </tbody>
+      </table>
       <p class='subheader'>Volume</p>
       <table style='width:100%;'>
         <tr>
@@ -520,17 +545,17 @@
             <%= number_with_precision(Brewhouse.water_lost_in_false_bottom, :precision => 2) %> l
           </td>
         </tr>
-        <tr>
+        <!-- <tr>
           <th>Expected First Runnings</th>
           <td class='no_line' style='text-align:right;'>=</td>
           <td>
-            <%= number_with_precision(@recipe.runnings, :precision => 2) %> l
+            <%= number_with_precision(@recipe.expected_first_runnings_volume, :precision => 2) %> l
             (
-              <%= number_with_precision(@recipe.runnings.to_f * @recipe.expected_first_runnings_gravity.to_f, :precision => 2) %> kg @
+              <%= number_with_precision(@recipe.expected_first_runnings_volume.to_f * @recipe.expected_first_runnings_gravity.to_f, :precision => 2) %> kg @
               <%= number_with_precision(@recipe.expected_first_runnings_gravity.to.brewers_points, :precision => 2) %>
             )
           </td>
-        </tr>
+        </tr> -->
         <tr>
           <th>&nbsp;</th>
           <td class='no_line'>&nbsp;</td>
@@ -547,7 +572,7 @@
           <th>Expected First Runnings</th>
           <td class='no_line' style='text-align:right;'>&ndash;</td>
           <td>
-            <%= number_with_precision(@recipe.runnings, :precision => 2) %> l
+            <%= number_with_precision(@recipe.expected_first_runnings_volume, :precision => 2) %> l
           </td>
         </tr>
         <tr>

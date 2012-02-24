@@ -8,7 +8,7 @@ class Brewhouse
   end
   
   def self.maximum_kettle_volume
-    (26.50).liters
+    (26.50).litres
   end
   
   def self.sample_loss
@@ -23,8 +23,8 @@ class Brewhouse
     (3.0).litres
   end
 
-  def self.liters_water_absorbed_per_g_of_hops
-    (0.015).liters
+  def self.litres_water_absorbed_per_g_of_hops
+    (0.015).litres
   end
 
   def self.litres_water_absorbed_per_kg_of_grain

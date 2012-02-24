@@ -1,5 +1,5 @@
 class Hop
-  attr_accessor(:name, :weight, :alpha, :form)
+  attr_reader(:name, :weight, :alpha, :form)
 
   def initialize(params = {})
     @name = params["NAME"]
@@ -11,19 +11,19 @@ class Hop
   end
 
   def aroma?
-    @use == "Aroma"
+    @use.downcase == "aroma"
   end
 
   def boil?
-    @use == "Boil"
+    @use.downcase == "boil"
   end
   
   def dry?
-    @use == "Dry Hop"
+    @use.downcase == "dry hop"
   end
 
   def first_wort?
-    @use == "First Wort"
+    @use.downcase == "first wort"
   end
   
   def leaf?
@@ -31,6 +31,6 @@ class Hop
   end
   
   def time
-    self.dry? ? (@time.to_i / 60 / 24) : @time
+    self.dry? ? (@time.to_i / 60 / 24) : @time.to_i
   end 
 end

@@ -31,7 +31,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def batch_size
-    @xml["BATCH_SIZE"].to_f.liters
+    @xml["BATCH_SIZE"].to_f.litres
   end
   
   def boil_hops
@@ -75,7 +75,20 @@ class Recipe < ActiveRecord::Base
 
   def expected_first_runnings_gravity
     expected_total_points_in_first_runnings = Brewhouse.some_percentage * (self.pre_boil_gravity.to.brewers_points.to_f * self.pre_boil_volume.to.gallons.to_f)
-    (expected_total_points_in_first_runnings / self.runnings.to.gallons.to_f).brewers_points.to.specific_gravity
+    (expected_total_points_in_first_runnings / self.expected_first_runnings_volume.to.gallons.to_f).brewers_points.to.specific_gravity
+  end
+
+  def expected_first_runnings_volume
+    (mash_volume.to_f - water_absorbed_by_grain.to_f - Brewhouse.water_lost_in_false_bottom.to_f).litres
+  end
+
+  def expected_second_runnings_gravity
+    expected_total_points_in_second_runnings = (1.0 - Brewhouse.some_percentage) * (self.pre_boil_gravity.to.brewers_points.to_f * self.pre_boil_volume.to.gallons.to_f)
+    (expected_total_points_in_second_runnings / (self.expected_second_runnings_volume.to.gallons.to_f)).brewers_points.to.specific_gravity
+  end
+
+  def expected_second_runnings_volume
+    (self.sparge_water - Brewhouse.sparge_loss).litres
   end
 
   def expected_mash_gravity
@@ -95,7 +108,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def fermenter_volume
-    (self.wort_to_fermenter.to_f + self.make_up_water.to_f).liters
+    (self.wort_to_fermenter.to_f + self.make_up_water.to_f).litres
   end
   
   def first_wort_hops
@@ -122,9 +135,9 @@ class Recipe < ActiveRecord::Base
     x = (self.batch_size - self.post_boil_volume).to_f
     if x > 0.5
       total_volume = (self.wort_to_fermenter.to_f * self.post_boil_original_gravity.to.brewers_points.to_f / estimated_original_gravity.to.brewers_points)
-      (total_volume - self.wort_to_fermenter.to_f).liters
+      (total_volume - self.wort_to_fermenter.to_f).litres
     else
-      0.liters
+      0.litres
     end
   end
   
@@ -168,7 +181,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def partial_boil?
-    self.make_up_water > (0.0).liters
+    self.make_up_water > (0.0).litres
   end
 
   def unmashed_gravity
@@ -176,11 +189,11 @@ class Recipe < ActiveRecord::Base
   end
 
   def post_boil_volume
-    (pre_boil_volume.to_f - (pre_boil_volume.to_f * total_evaporation_rate)).liters
+    (pre_boil_volume.to_f - (pre_boil_volume.to_f * total_evaporation_rate)).litres
   end
 
   def pre_boil_volume
-    @xml["BOIL_SIZE"].to_f.liters
+    @xml["BOIL_SIZE"].to_f.litres
   end
 
   def pre_boil_gravity
@@ -188,15 +201,11 @@ class Recipe < ActiveRecord::Base
   end
 
   def packaging_volume
-    (self.fermenter_volume.to_f - Brewhouse.fermenter_loss.to_f).liters
-  end
-
-  def runnings
-    (mash_volume.to_f - water_absorbed_by_grain.to_f - Brewhouse.water_lost_in_false_bottom.to_f).liters
+    (self.fermenter_volume.to_f - Brewhouse.fermenter_loss.to_f).litres
   end
 
   def sparge_water
-    (pre_boil_volume.to_f - runnings.to_f).liters + Brewhouse.sparge_loss
+    (pre_boil_volume.to_f - expected_first_runnings_volume.to_f).litres + Brewhouse.sparge_loss
   end
 
   def strike_temp(goal_temp, current_temp, infusion_water_volume, grain_weight, current_water_volume = 0.0)
@@ -210,7 +219,7 @@ class Recipe < ActiveRecord::Base
 
   def expected_hourly_evaporation_rate
     self.hours_of_boil * Brewhouse.hourly_evaporation_rate
-    # ((self.pre_boil_volume - @xml["BATCH_SIZE"].to_f.liters) / self.pre_boil_volume) / hours_of_boil
+    # ((self.pre_boil_volume - @xml["BATCH_SIZE"].to_f.litres) / self.pre_boil_volume) / hours_of_boil
   end
 
   def hours_of_boil
@@ -228,13 +237,13 @@ class Recipe < ActiveRecord::Base
   def water_absorbed_by_hops
     loss = 0.0
     self.boil_hops.each do |h|
-      loss += (Brewhouse.liters_water_absorbed_per_g_of_hops.to_f * h.weight.to_f) if h.leaf?
+      loss += (Brewhouse.litres_water_absorbed_per_g_of_hops.to_f * h.weight.to_f) if h.leaf?
     end
-    loss.liters
+    loss.litres
   end
 
   def wort_to_fermenter
-    (post_boil_volume.to_f - Brewhouse.trub_loss.to_f - Brewhouse.sample_loss.to_f - self.water_absorbed_by_hops.to_f).liters
+    (post_boil_volume.to_f - Brewhouse.trub_loss.to_f - Brewhouse.sample_loss.to_f - self.water_absorbed_by_hops.to_f).litres
   end
 
   def yeasts
