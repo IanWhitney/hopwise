@@ -458,6 +458,16 @@
         </thead>
         <tbody>
           <tr>
+            <th>Potassium Metabisulfite: </th>
+            <td class='single_right' >
+              <%= number_with_precision(@recipe.mash_volume * 4 * 2, :precision => 0) %>mg
+            </td>
+            <td class='single_right' >
+              <%= number_with_precision(@recipe.sparge_water * 4 * 2, :precision => 0) %>mg
+            </td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
             <th>Gypsum: </th>
             <td class='single_right' >&nbsp;</td>
             <td class='single_right' >&nbsp;</td>
