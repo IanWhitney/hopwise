@@ -51,22 +51,19 @@
     <div class='grid_24 header'>
       Yeast
     </div>
-    <div class='grid_16'>
-      <p class='subheader'>Types</p>
-      <%= render :partial => "yeast_row", :collection => @recipe.yeasts, :as => :yeast %>
-    </div>
-    <div class='grid_8'>
-      <p class='subheader'>Starter</p>
+    <div class='grid_24'>
       <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Goal Cells</th>
+            <th>Yeast Viability</th>
+            <th>Starter Volume</th>
+            <th>Starter Aeration</th>            
+          </tr>
+        </thead>
         <tbody>
-          <tr>
-            <th>Yeast Viability:</th>
-            <td style='width:100%;'>&nbsp;</td>
-          </tr>
-          <tr>
-            <th>Volume: </th>
-            <td style='width:100%;'>&nbsp;</td>
-          </tr>
+          <%= render :partial => "starter_row", :collection => @recipe.yeasts, :as => :yeast %>
         </tbody>
       </table>
     </div>
