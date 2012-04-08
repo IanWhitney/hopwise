@@ -20,7 +20,7 @@ class Brewhouse
   end
 
   def self.trub_loss
-    (3.0).litres
+    (2.0).litres
   end
 
   def self.litres_water_absorbed_per_g_of_hops
@@ -31,11 +31,19 @@ class Brewhouse
     (0.91).litres
   end
 
+  def self.percent_gravity_extracted_in_first_runnings
+    (0.63)
+  end
+
   def self.water_lost_in_false_bottom
     (1.20).litres
   end
   
-  def self.percent_gravity_extracted_in_first_runnings
-    (0.63)
+  def self.whirlfloc_per_liter
+    (0.027).grams
+  end
+  
+  def self.yeast_nutrient_per_liter
+    (0.115).grams
   end
 end

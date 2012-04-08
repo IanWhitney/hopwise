@@ -167,8 +167,12 @@ class Recipe < ActiveRecord::Base
     end
   end
 
+  def maximum_extractable_points
+    (grains.sum {|g| g.total_gravity_points})
+  end
+
   def maximum_mash_gravity
-    (((grains.sum {|g| g.total_gravity_points}) / pre_boil_volume.to.gallons.to_f)).brewers_points.to.specific_gravity
+    ((maximum_extractable_points / pre_boil_volume.to.gallons.to_f)).brewers_points.to.specific_gravity
   end
 
   def notes
@@ -176,7 +180,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def partial_boil?
-    self.make_up_water > (0.0).litres
+    beerxml["BATCH_SIZE"].to_f.litres > self.pre_boil_volume
   end
 
   def unmashed_gravity
@@ -213,8 +217,12 @@ class Recipe < ActiveRecord::Base
   end
 
   def expected_hourly_evaporation_rate
-    self.hours_of_boil * Brewhouse.hourly_evaporation_rate
-    # ((self.pre_boil_volume - beerxml["BATCH_SIZE"].to_f.litres) / self.pre_boil_volume) / hours_of_boil
+    # self.hours_of_boil * Brewhouse.hourly_evaporation_rate
+    if self.partial_boil?
+      self.hours_of_boil * Brewhouse.hourly_evaporation_rate
+    else
+      ((self.pre_boil_volume - beerxml["BATCH_SIZE"].to_f.litres) / self.pre_boil_volume) / hours_of_boil
+    end
   end
 
   def hours_of_boil

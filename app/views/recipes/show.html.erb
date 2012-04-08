@@ -120,44 +120,43 @@
         </tbody>
       </table>
       <img src="http://chart.apis.google.com/chart?chxp=0,0,15,30,45,60&chf=bg,s,ffffff&chxr=0,0,60|1,100,170&chxs=0,676767,11.5,0,lt,676767|1,676767,11.5,-0.5,lt,676767&chxt=x,y&chs=390x300&cht=lxy&chd=s:&chg=25,7.15,0,0" width="390" height="300" alt="" style='margin-top:10px;'/>
+      <p class='subheader'>
+        Efficiency
+      </p>
+      <p>
+        Maximum Extractable Points: <%= number_with_precision(@recipe.maximum_extractable_points, :precision => 2) %>
+      </p>
       <table style='margin:1em 0em 0em 0em !important;'>
         <thead>
           <tr>
-            <th>Max Gravity</th>
-            <th>Actual Gravity</th>
-            <th>Efficiency</th>
+            <th>&nbsp;</th>
+            <th>PPG</th>
+            <th>G</th>
+            <th>Total Points</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class='single_right' style='text-align:center;vertical-align:middle;'>
-              <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
-                <%= number_with_precision(@recipe.maximum_mash_gravity.to.brewers_points, :precision => 0) %>
-              </div>
-              |
-              <div style='text-align:left !important; display:inline;float:right;width:45%;'>
-                &nbsp;
-              </div>
+            <td>
+              Expected - 
+              <%= number_with_precision(@recipe.expected_efficiency.to_f * 100, :precision => 0) %> %
             </td>
-            <td class='single_right' style='text-align:center;vertical-align:middle;'>
-              <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
-                <%= number_with_precision(@recipe.expected_mash_gravity.to.brewers_points, :precision => 0) %>
-                (<%=  number_with_precision(@recipe.expected_mash_gravity.to.terril_brix, :precision => 1) %>)
-              </div>
-              |
-              <div style='text-align:left !important; display:inline;float:right;width:45%;'>
-                &nbsp;
-              </div>
+            <td style='text-align:center;'>
+              <%= number_with_precision(@recipe.expected_mash_gravity.to.brewers_points, :precision => 0) %>
+              (<%=  number_with_precision(@recipe.expected_mash_gravity.to.terril_brix, :precision => 1) %>)
             </td>
-            <td style='text-align:center;vertical-align:middle;'>
-              <div style='text-align:middle !important; display:inline;float:left;width:45%;'>
-                <%= number_with_precision(@recipe.expected_efficiency, :precision => 2) %>
-              </div>
-              |
-              <div style='text-align:left !important; display:inline;float:right;width:45%;'>
-                &nbsp;
-              </div>
+            <td style='text-align:center;'>
+              <%= number_with_precision(@recipe.pre_boil_volume.to.gallons, :precision => 2) %>
             </td>
+            <td style='text-align:center;'>
+              <%= number_with_precision((@recipe.expected_mash_gravity.to.brewers_points.to_f * @recipe.pre_boil_volume.to.gallons.to_f), :precision => 2) %>
+            </td>
+          </tr>
+          <tr>
+            <td>Actual</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
           </tr>
         </tbody>
       </table>
@@ -228,6 +227,10 @@
     </div>
     <div class='grid_14'>
       <p class='header'>Recipe</p>
+      <% if @recipe.notes %>
+        <p class='subheader'>Notes</p>
+        <p><%= @recipe.notes %></p>
+      <% end %>
       <p class='subheader'>Grist</p>
       <table>
         <thead>
@@ -250,7 +253,6 @@
           <tr>
             <th style='width:4em !important;'>Time</th>
             <th style='width:3em !important;'>Qty</th>
-            <th style='width:3em !important;'>Oz/g</th>
             <th>Ingredient</th>
             <th style='width:4em !important;white-space: nowrap;'>&alpha; Acid</th>
             <th style='width:4em !important;'>Form</th>
@@ -269,6 +271,7 @@
         <thead>
           <tr>
             <th style='width:4em !important;'>Time</th>
+            <th style='width:3em !important;'>Qty</th>
             <th>Ingredient</th>
           </tr>
         </thead>
@@ -429,10 +432,6 @@
     <div class='grid_18'>
       <img src="http://chart.apis.google.com/chart?chf=bg,s,ffffff&chxr=0,0,10|1,30,80&chxs=0,676767,11.5,0,lt,676767|1,676767,11.5,-0.5,lt,676767&chxt=x,y&chs=710x150&cht=lxy&chd=s:&chg=-1,10,0,0" width="710" height="150" alt="" />
     </div>
-    <div class='grid_24'>
-      <p class='header'>Recipe Notes</p>
-      <p><%= @recipe.notes %></p>
-    </div>
   </div>
   <div class='container_24' style='page-break-before:always;'>
     <div class='grid_18' style='text-align:left;margin-top:12pt;'>
@@ -478,7 +477,7 @@
           </tr>
         </tbody>
       </table>
-      <p class='subheader'>Expected Runnings</p>
+      <p class='subheader'>Runnings</p>
       <table>
         <thead>
           <tr>
@@ -490,7 +489,7 @@
         </thead>
         <tbody>
           <tr>
-            <th>First: </th>
+            <th>First - Expected: </th>
             <td class='single_right' >
               <%= number_with_precision(@recipe.expected_first_runnings_gravity.to.brewers_points, :precision => 2) %>
               (<%= number_with_precision(@recipe.expected_first_runnings_gravity.to.terril_brix, :precision => 1) %>)
@@ -499,13 +498,37 @@
             <td><%= number_with_precision(@recipe.expected_first_runnings_volume, :precision => 2) %> l</td>
           </tr>
           <tr>
-            <th>Second: </th>
+            <th>First - Actual: </th>
+            <td class='single_right' >
+              &nbsp;
+            </td>
+            <td class='single_right' >
+              &nbsp;
+            </td>
+            <td>
+              &nbsp;
+            </td>
+          </tr>
+          <tr>
+            <th>Second - Expected: </th>
             <td class='single_right' >
               <%= number_with_precision(@recipe.expected_second_runnings_gravity.to.brewers_points, :precision => 2) %>
               (<%= number_with_precision(@recipe.expected_second_runnings_gravity.to.terril_brix, :precision => 1) %>)
             </td>
             <td class='single_right' ><%= number_with_precision(@recipe.expected_second_runnings_volume.to_f * @recipe.expected_second_runnings_gravity.to_f, :precision => 2) %> kg</td>
             <td><%= number_with_precision(@recipe.expected_second_runnings_volume, :precision => 2) %> l</td>
+          </tr>
+          <tr>
+            <th>Second - Actual: </th>
+            <td class='single_right' >
+              &nbsp;
+            </td>
+            <td class='single_right' >
+              &nbsp;
+            </td>
+            <td>
+              &nbsp;
+            </td>
           </tr>
         </tbody>
       </table>
@@ -808,7 +831,7 @@
     </div>
     <div class='grid_24'>
       <p class='header'>Brewing Notes</p>
-      <% 6.times do |x| %>
+      <% 4.times do |x| %>
         <p class='entry_line'>&nbsp;</p>
       <% end %>
     </div>

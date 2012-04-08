@@ -1,4 +1,5 @@
 <tr>
   <td class='single_right'><%= addition.time %> min</td>
+  <td class='single_right'><%= number_with_precision(addition.amount(@recipe).to.grams, :precision => 2) %>g</td>
   <td><%= addition.name %></td>
 </tr>

@@ -4,4 +4,8 @@ class Addition
     @name = params["NAME"]
     @time = params["TIME"]
   end
+  
+  def amount(recipe)
+    "null"
+  end
 end
