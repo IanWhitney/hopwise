@@ -129,8 +129,8 @@ class Recipe < ActiveRecord::Base
   def make_up_water
     x = (self.batch_size - self.post_boil_volume).to_f
     if x > 0.5
-      total_volume = (self.wort_to_fermenter.to_f * self.post_boil_original_gravity.to.brewers_points.to_f / estimated_original_gravity.to.brewers_points)
-      (total_volume - self.wort_to_fermenter.to_f).litres
+      total_wort_needed = self.wort_to_fermenter.to_f / (estimated_original_gravity.to.brewers_points / self.post_boil_original_gravity.to.brewers_points)
+      (total_wort_needed - self.wort_to_fermenter.to_f).litres
     else
       0.litres
     end

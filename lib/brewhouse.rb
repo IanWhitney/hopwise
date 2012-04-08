@@ -4,15 +4,15 @@ class Brewhouse
   end
   
   def self.hourly_evaporation_rate
-    0.10
+    0.18
   end
   
   def self.maximum_kettle_volume
-    (26.50).litres
+    (54).litres
   end
   
   def self.sample_loss
-    (0.6).litres
+    (0.0).litres
   end
   
   def self.sparge_loss
