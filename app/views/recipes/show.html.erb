@@ -76,12 +76,6 @@
             <td style='width:100%;'><%= @recipe.mash_thickness %> l/kg</td>
           </tr>
           <tr>
-            <th>Mash Volume: </th>
-            <td style='width:100%;'>
-              <%= number_with_precision(@recipe.mash_volume, :precision => 2) %> l
-            </td>
-          </tr>
-          <tr>
             <th>Mash Temp: </th>
             <td style='width:100%;'>
               <% if @recipe.mash_details_included? %>
@@ -130,8 +124,8 @@
         <thead>
           <tr>
             <th>&nbsp;</th>
-            <th>PPG</th>
-            <th>G</th>
+            <th>Gravity</th>
+            <th>Gal</th>
             <th>Total Points</th>
           </tr>
         </thead>
@@ -227,10 +221,6 @@
     </div>
     <div class='grid_14'>
       <p class='header'>Recipe</p>
-      <% if @recipe.notes %>
-        <p class='subheader'>Notes</p>
-        <p><%= @recipe.notes %></p>
-      <% end %>
       <p class='subheader'>Grist</p>
       <table>
         <thead>
@@ -279,6 +269,10 @@
           <%= render :partial => 'addition_row', :collection => @recipe.additions, :as => :addition %>
         </tbody>
       </table>
+      <% end %>
+      <% if @recipe.notes %>
+        <p class='subheader'>Notes</p>
+        <p><%= @recipe.notes %></p>
       <% end %>
     </div>
     <div class='clear'>&nbsp;</div>
@@ -481,7 +475,7 @@
       <table>
         <thead>
           <tr>
-            <th style='border-bottom: solid transparent 1px !important;'>&nbsp;</th>
+            <th style='border-bottom: solid transparent 1px !important;' colspan='2'>&nbsp;</th>
             <th style='width:25%;'>Gravity</th>
             <th style='width:25% !important;'>Weight</th>
             <th style='width:25% !important;'>Volume</th>
@@ -489,7 +483,8 @@
         </thead>
         <tbody>
           <tr>
-            <th>First - Expected: </th>
+            <th rowspan='2' style='vertical-align:middle;'>First</th>
+            <th>Expected:</th>
             <td class='single_right' >
               <%= number_with_precision(@recipe.expected_first_runnings_gravity.to.brewers_points, :precision => 2) %>
               (<%= number_with_precision(@recipe.expected_first_runnings_gravity.to.terril_brix, :precision => 1) %>)
@@ -498,7 +493,7 @@
             <td><%= number_with_precision(@recipe.expected_first_runnings_volume, :precision => 2) %> l</td>
           </tr>
           <tr>
-            <th>First - Actual: </th>
+            <th>Actual: </th>
             <td class='single_right' >
               &nbsp;
             </td>
@@ -510,7 +505,8 @@
             </td>
           </tr>
           <tr>
-            <th>Second - Expected: </th>
+            <th rowspan='2' style='vertical-align:middle;'>Second</th>
+            <th>Expected:</th>
             <td class='single_right' >
               <%= number_with_precision(@recipe.expected_second_runnings_gravity.to.brewers_points, :precision => 2) %>
               (<%= number_with_precision(@recipe.expected_second_runnings_gravity.to.terril_brix, :precision => 1) %>)
@@ -519,7 +515,7 @@
             <td><%= number_with_precision(@recipe.expected_second_runnings_volume, :precision => 2) %> l</td>
           </tr>
           <tr>
-            <th>Second - Actual: </th>
+            <th>Actual:</th>
             <td class='single_right' >
               &nbsp;
             </td>

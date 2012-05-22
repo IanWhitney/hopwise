@@ -54,7 +54,8 @@ class Recipe < ActiveRecord::Base
   end
   
   def estimated_original_gravity
-    beerxml["EST_OG"].to_f.specific_gravity
+    #beerxml["EST_OG"].to_f.specific_gravity
+    self.post_boil_original_gravity
   end
 
   def post_boil_original_gravity
