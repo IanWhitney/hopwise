@@ -1,6 +1,6 @@
 class Brewhouse
   def self.fermenter_loss
-    (1.89).litres
+    (0.50).litres
   end
   
   def self.hourly_evaporation_rate
