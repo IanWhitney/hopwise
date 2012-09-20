@@ -138,19 +138,23 @@ class Recipe < ActiveRecord::Base
   end
   
   def mash
-    beerxml["MASHS"]["MASH"]
+    if beerxml["MASHS"]
+      beerxml["MASHS"]["MASH"]
+    else
+      beerxml["MASH"]
+    end
   end
 
   def mash_details_included?
-    beerxml["MASHS"] && beerxml["MASHS"]["MASH"]
+    (beerxml["MASHS"] && beerxml["MASHS"]["MASH"]) || beerxml["MASH"]
   end
 
   def mash_temp
     if mash_details_included?
       begin
-        beerxml["MASHS"]["MASH"]["MASH_STEPS"].first[1].first["STEP_TEMP"].to_f.celsius
+        mash["MASH_STEPS"].first[1].first["STEP_TEMP"].to_f.celsius
       rescue
-        beerxml["MASHS"]["MASH"]["MASH_STEPS"].first[1]["STEP_TEMP"].to_f.celsius
+        mash["MASH_STEPS"].first[1]["STEP_TEMP"].to_f.celsius
       end
     end
   end

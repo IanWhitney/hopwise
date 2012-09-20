@@ -40,7 +40,7 @@ class Brewhouse
   end
   
   def self.whirlfloc_per_liter
-    (0.027).grams
+    (0.020).grams
   end
   
   def self.yeast_nutrient_per_liter
