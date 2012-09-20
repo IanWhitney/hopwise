@@ -214,7 +214,7 @@ class Recipe < ActiveRecord::Base
   end
   
   def style
-    beerxml["STYLE"]["NAME"]
+    beerxml["STYLE"]["NAME"] rescue ''
   end
 
   def expected_hourly_evaporation_rate
