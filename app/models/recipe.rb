@@ -255,7 +255,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def yeasts
-    xml_collection_to_objects("yeast")
+    xml_collection_to_objects("yeast") rescue []
   end
 private
 
