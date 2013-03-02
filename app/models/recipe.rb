@@ -1,7 +1,7 @@
 class Recipe < ActiveRecord::Base
   has_attached_file :xml
   validates_attachment_presence :xml
-  
+
   validates_uniqueness_of :batch_number
   validates_presence_of :name
 
@@ -12,7 +12,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def additions
-    if beerxml["MISCS"].respond_to?(:keys) 
+    if beerxml["MISCS"].respond_to?(:keys)
       xml_collection_to_objects("misc").sort! {|a,b| b.time <=> a.time }
     end
   end
@@ -28,7 +28,7 @@ class Recipe < ActiveRecord::Base
   def batch_size
     beerxml["BATCH_SIZE"].to_f.litres
   end
-  
+
   def boil_hops
     all_hops.reject {|h| !h.boil?}
   end
@@ -40,7 +40,7 @@ class Recipe < ActiveRecord::Base
   def color
     beerxml["EST_COLOR"]
   end
-  
+
   def dry_hops
     (all_hops.reject {|h| !h.dry?})
   end
@@ -52,7 +52,7 @@ class Recipe < ActiveRecord::Base
   def estimated_final_gravity
     beerxml["EST_FG"].to_f.specific_gravity
   end
-  
+
   def estimated_original_gravity
     #beerxml["EST_OG"].to_f.specific_gravity
     self.post_boil_original_gravity
@@ -106,7 +106,7 @@ class Recipe < ActiveRecord::Base
   def fermenter_volume
     (self.wort_to_fermenter.to_f + self.make_up_water.to_f).litres
   end
-  
+
   def first_wort_hops
     (all_hops.reject {|h| !h.first_wort?})
   end
@@ -118,7 +118,7 @@ class Recipe < ActiveRecord::Base
   def grain_weight
     (grains.sum {|g| g.weight.to_f}).kilograms
   end
-  
+
   def ibu
     beerxml["IBU"]
   end
@@ -126,7 +126,7 @@ class Recipe < ActiveRecord::Base
   def ibu_method
     beerxml["IBU_METHOD"]
   end
-  
+
   def make_up_water
     x = (self.batch_size - self.post_boil_volume).to_f
     if x > 0.5
@@ -136,7 +136,7 @@ class Recipe < ActiveRecord::Base
       0.litres
     end
   end
-  
+
   def mash
     if beerxml["MASHS"]
       beerxml["MASHS"]["MASH"]
@@ -160,7 +160,7 @@ class Recipe < ActiveRecord::Base
   end
 
   def mash_thickness
-    2.6
+    3.2
   end
 
   def mash_volume
@@ -216,7 +216,7 @@ class Recipe < ActiveRecord::Base
     x = (infusion_water_volume.to_f * goal_temp.to_f - (0.4 * grain_weight.to_f + current_water_volume.to_f) * (current_temp.to_f - goal_temp.to_f)) / infusion_water_volume.to_f
     x.celsius
   end
-  
+
   def style
     beerxml["STYLE"]["NAME"] rescue ''
   end
@@ -275,7 +275,7 @@ private
       beerxml[key].first.values.first
     end
   end
-    
+
   def xml_collection_to_objects(collection)
     object_collection = []
     flattened_array_or_hash(collection.pluralize.upcase).each do |f|
@@ -283,5 +283,5 @@ private
     end
     object_collection
   end
-  
+
 end
