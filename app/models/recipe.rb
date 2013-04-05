@@ -160,7 +160,12 @@ class Recipe < ActiveRecord::Base
   end
 
   def mash_thickness
-    3.2
+    if mash_details_included?
+      string_ratio = mash["MASH_STEPS"].first[1]["WATER_GRAIN_RATIO"]
+      (/[0-9\.]+/.match(string_ratio)[0]).to_f
+    else
+      0
+    end
   end
 
   def mash_volume
